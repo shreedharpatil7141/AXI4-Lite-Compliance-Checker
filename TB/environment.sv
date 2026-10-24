@@ -48,6 +48,58 @@ class scoreboard2 extends scoreboard;
   endfunction
 endclass
 
+// DUT-side latency probe: reads obs_txn from a monitor attached to dbus (DUT-facing bus).
+// [0]=write [1]=read ; metric [0]=L1 [1]=L2 [2]=L3. Same definitions as scoreboard.
+class lat_probe;
+  mailbox #(obs_txn) mb;
+  longint lmin [2][3];
+  longint lmax [2][3];
+  longint lsum [2][3];
+  longint lcnt [2];
+
+  function new(mailbox #(obs_txn) m);
+    mb = m;
+    clear();
+  endfunction
+
+  function void clear();
+    for (int k = 0; k < 2; k++) begin
+      lcnt[k] = 0;
+      for (int j = 0; j < 3; j++) begin
+        lmin[k][j] = 1000000; lmax[k][j] = 0; lsum[k][j] = 0;
+      end
+    end
+  endfunction
+
+  task run();
+    obs_txn o;
+    longint d [3];
+    int     k;
+    forever begin
+      mb.get(o);
+      if (!o.unexpected) begin
+        k = (o.op == OP_WRITE) ? 0 : 1;
+        d[0] = o.c_vld - o.c_req;
+        d[1] = o.c_rsp - o.c_vld;
+        d[2] = o.c_rsp - o.c_req;
+        if (d[0] >= 0 && d[1] >= 0) begin
+          lcnt[k]++;
+          for (int j = 0; j < 3; j++) begin
+            if (d[j] < lmin[k][j]) lmin[k][j] = d[j];
+            if (d[j] > lmax[k][j]) lmax[k][j] = d[j];
+            lsum[k][j] += d[j];
+          end
+        end
+      end
+    end
+  endtask
+
+  function string str(int k, int m);
+    if (lcnt[k] == 0) return "n/a";
+    return $sformatf("%0d/%0.2f/%0d", lmin[k][m], real'(lsum[k][m]) / real'(lcnt[k]), lmax[k][m]);
+  endfunction
+endclass
+
 class environment;
   mailbox #(transaction) g2d;
   mailbox #(transaction) d2c;

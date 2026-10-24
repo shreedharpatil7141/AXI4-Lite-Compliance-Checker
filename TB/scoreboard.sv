@@ -94,7 +94,7 @@ class scoreboard;
     n_wr++;
     if (o.rsp !== er) begin
       n_resp_mis++;
-      void'(viol_mon::report(V_DATA_MISMATCH, "B", o.t_rsp,
+      void'(viol_mon::report(V_RESP_CODE_MISMATCH, "B", o.t_rsp,
             $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0));
     end
     rec_lat(0, o);
@@ -107,7 +107,7 @@ class scoreboard;
     n_rd++;
     if (o.rsp !== er) begin
       n_resp_mis++;
-      void'(viol_mon::report(V_DATA_MISMATCH, "R", o.t_rsp,
+      void'(viol_mon::report(V_RESP_CODE_MISMATCH, "R", o.t_rsp,
             $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0));
     end
     if (o.data !== ed) begin
@@ -131,9 +131,18 @@ class scoreboard;
     end
   endtask
 
+  // pend_w : complete writes (AW and W accepted) without response
+  // pend_r : accepted reads without response
+  // inc_w  : write requests with only one of AW/W accepted (reported as accounting, not missing response)
   function void final_check(int unsigned drv_done, int unsigned drv_to,
-                            int unsigned pend_w, int unsigned pend_r);
+                            int unsigned pend_w, int unsigned pend_r,
+                            int unsigned inc_w = 0);
     n_drv_to = drv_to;
+    if (inc_w != 0) begin
+      n_acct++;
+      void'(viol_mon::report(V_ACCOUNTING, "AW/W", $time,
+            $sformatf("incomplete write request: only one of AW/W accepted (items=%0d)", inc_w), 1'b0));
+    end
     if ((n_wr + n_rd) != drv_done) begin
       n_acct++;
       void'(viol_mon::report(V_ACCOUNTING, "-", $time,
@@ -142,7 +151,7 @@ class scoreboard;
     n_pend += pend_w + pend_r;
     for (int i = 0; i < (pend_w + pend_r); i++)
       void'(viol_mon::report(V_MISSING_RESP, $sformatf("REQ%0d", i), $time,
-            $sformatf("accepted request without response (wr_items=%0d rd_items=%0d)", pend_w, pend_r), 1'b0));
+            $sformatf("accepted request without response (wr_txn=%0d rd_txn=%0d)", pend_w, pend_r), 1'b0));
     for (int i = 0; i < drv_to; i++)
       void'(viol_mon::report(V_RESP_TIMEOUT, $sformatf("DRV%0d", i), $time,
             "driver bounded wait expired", 1'b0));

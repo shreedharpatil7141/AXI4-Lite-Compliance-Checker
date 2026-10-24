@@ -61,39 +61,47 @@ different DUTs (an AXI4-Lite RAM and an AXI4-Lite GPIO block). Only the referenc
 ### 2.1 Block diagram
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph TB["Testbench (module tb)"]
-        direction TB
-        TL["test_lib / test_cfg<br/>14 tests, seeds, delays"]
-        GEN["generator<br/>directed + random"]
+        direction LR
+        CTRL["test_lib / test_cfg<br/>test selection, seeds, delay config"]
+        GEN["generator<br/>directed + constrained-random"]
         DRV["driver<br/>AW/W/AR + B/R backpressure"]
-        MON["monitor<br/>observed handshakes only"]
-        SCB["scoreboard2<br/>ref_model + latency stats"]
-        COV["cov_collector<br/>covergroups + 49 goals"]
-        VM["viol_mon (static)<br/>11 categories, dedup"]
-        CHK["axi4l_checker<br/>20 SVA + A13/A14"]
-        TL --> GEN --> DRV
+        CTRL --> GEN --> DRV
     end
 
-    BUS["bus<br/>axi4l_if (master side)"]
-    SHIM["axi4l_shim<br/>latency injector<br/>+ fault hooks"]
-    DBUS["dbus<br/>axi4l_if (DUT side)"]
+    MIF["bus<br/>axi4l_if<br/>master-side observation point"]
+    SHIM["axi4l_shim<br/>legal latency injection<br/>verification-only fault hooks"]
+    DIF["dbus<br/>axi4l_if<br/>DUT-side interface"]
     SEL["dut_sel<br/>+DUT=ram or gpio"]
     RAM["axi4_lite_ram"]
     GPIO["axi4_lite_gpio"]
 
-    DRV --> BUS
-    BUS --> SHIM --> DBUS --> SEL
+    DRV -->|drive transactions| MIF
+    MIF <--> SHIM
+    SHIM <--> DIF
+    DIF --> SEL
     SEL --> RAM
     SEL --> GPIO
-    BUS -.observe.-> MON
-    BUS -.observe.-> CHK
+
+    MON["monitor<br/>rebuilds completed transactions"]
+    CHK["axi4l_checker<br/>20 SVA + procedural checks"]
+    SCB["scoreboard2<br/>reference model + latency checks"]
+    COV["cov_collector<br/>covergroups + 49 goals"]
+    VM["viol_mon<br/>11 categories + dedup"]
+
+    MIF -. observe handshakes .-> MON
+    MIF -. observe protocol .-> CHK
     MON --> SCB
     MON --> COV
     CHK --> VM
     SCB --> VM
-    COV -.negative cov.-> VM
+    COV -. expected/unexpected .-> VM
 ```
+
+**Signal path:** `driver -> bus -> shim -> dbus -> selected DUT`.<br>
+**Observation path:** `bus -> monitor/checker -> scoreboard, coverage and violation monitor`.<br>
+The checker and monitor are passive: neither reads nor modifies DUT state.
 
 ### 2.2 DUT-agnostic split
 
@@ -127,8 +135,46 @@ assertion can fire, independent of any DUT.
 
 ```mermaid
 flowchart LR
-    FT["fault_tasks.sv<br/>run_fault(1..18)"] --> FB["fbus"] --> FC["axi4l_checker (fchk)"] --> VM["viol_mon<br/>set_expect(cat, ch)"]
+    FT["fault_task.sv<br/>run_fault(1..18)"] --> FB["fbus<br/>axi4l_if + FRST"] --> FC["axi4l_checker (fchk)"] --> VM["viol_mon<br/>set_expect(cat, ch)"]
 ```
+
+### 2.4 Test execution flow
+
+```mermaid
+flowchart TD
+    START(["Start tb"]) --> OPT["Parse plusargs<br/>TEST, SEED, DUT, NEG, FAULT"]
+    OPT --> BUILD["Build environment<br/>driver, monitor, scoreboard2, coverage"]
+    BUILD --> MODE{"Selected mode"}
+
+    MODE -->|legal test or regress| CFG["Apply per-test seed<br/>and shim delays"]
+    CFG --> RESET["Reset DUT and shim"]
+    RESET --> RUN["Generate traffic"]
+    RUN --> OBS["Monitor bus handshakes"]
+    OBS --> CHECK["Scoreboard checks data, responses<br/>and L1/L2/L3 latency"]
+    CHECK --> REPORT["Run final checks<br/>and print RESULT"]
+    REPORT --> MORE{"More tests?"}
+    MORE -->|yes| CFG
+    MORE -->|no| SUMMARY["Print VSUM, COV and REGRESS"]
+
+    MODE -->|closure| BASE["Run t_directed"]
+    BASE --> GAP["Read uncovered goals"]
+    GAP --> MAP["Map gaps to fixed tests"]
+    MAP --> PICK{"Tests selected?"}
+    PICK -->|yes| CFG
+    PICK -->|no| SUMMARY
+
+    MODE -->|negative or fault| NEGRESET["Reset selected test bus"]
+    NEGRESET --> INJECT["Inject one fault"]
+    INJECT --> DETECT["Checker/scoreboard reports violation"]
+    DETECT --> NEGREPORT["Compare expected vs observed"]
+    NEGREPORT --> SUMMARY
+
+    SUMMARY --> FINISH(["Finish"])
+```
+
+The legal path measures observed behavior; the negative and fault paths intentionally inject
+one failure and pass only when the expected violation category is reported. The closure path
+is a fixed gap-to-test rerun, not an adaptive stimulus generator.
 
 ---
 
@@ -160,10 +206,10 @@ flowchart LR
 | `violation_monitor.sv` | `vcat_e` categories and static `viol_mon` class |
 | `coverage.sv` | `cov_collector`: covergroups, goal tracker, gap report |
 | `assertions.sv` | `axi4l_checker` module (SVA + procedural checks) |
-| `latency_injector.sv` | `axi4l_shim` module (latency plus verification-only fault hooks) |
+| `latyency_injector.sv` | `axi4l_shim` module (latency plus verification-only fault hooks) |
 | `environment.sv` | `scoreboard2` and `environment` classes |
 | `test.sv` | `test_cfg`, `test_lib`, gap-to-test map |
-| `fault_tasks.sv` | Fault-bus driver tasks, included inside `module tb` |
+| `fault_task.sv` | Fault-bus driver tasks, included inside `module tb` |
 
 ### 3.2 Compile order
 
@@ -180,8 +226,8 @@ flowchart TB
     TBS["testbench.sv"] --> PKG["package tb_pkg"]
     PKG --> T1["transaction.sv"] --> T2["violation_monitor.sv"] --> T3["monitor.sv"] --> T4["coverage.sv"] --> T5["scoreboard.sv"] --> T6["gpio_model.sv"] --> T7["generator.sv"] --> T8["driver.sv"] --> T9["environment.sv"] --> T10["test.sv"]
     TBS --> ASR["assertions.sv (module)"]
-    TBS --> SHM["latency_injector.sv (module)"]
-    TBS --> TOP["module tb"] --> FLT["fault_tasks.sv (inside tb)"]
+    TBS --> SHM["latyency_injector.sv (module)"]
+    TBS --> TOP["module tb"] --> FLT["fault_task.sv (inside tb)"]
 ```
 
 The package provides one shared scope and a fixed class order. The checker and shim are modules, so they sit
@@ -556,7 +602,7 @@ The summary is printed to the transcript. No file I/O or external script is need
 4. Paste the matching code into each tab.
 5. **Check every tab:**
    - Line 1 must be code. A filename glued in front of `package` or `` `ifndef `` breaks the whole compile.
-   - Last lines: class files end with `endclass` then `` `endif ``. Module files end with `endmodule` then `` `endif ``. `testbench.sv` ends with `endmodule`. `fault_tasks.sv` ends with `endtask` (no include guard, it is pasted into `module tb`).
+   - Last lines: class files end with `endclass` then `` `endif ``. Module files end with `endmodule` then `` `endif ``. `testbench.sv` ends with `endmodule`. `fault_task.sv` ends with `endtask` (no include guard, it is pasted into `module tb`).
 6. **Run Options** (one line, no pasted log text):
 
    ```text
@@ -667,7 +713,7 @@ Mutation note: under `+MUT=1`, `t_boundary` (full-strobe writes only) still pass
 5. **Adjust the generator address range** if the DUT is not a word-aligned memory.
 6. Run `+TEST=regress`, then `+NEG=100`.
 
-No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_monitor.sv` or `latency_injector.sv`.
+No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_monitor.sv` or `latyency_injector.sv`.
 
 ---
 

@@ -1,10 +1,11 @@
 `ifndef AXI4L_CHECKER_SV
 `define AXI4L_CHECKER_SV
-module axi4l_checker (axi4l_if vif);
+// PT = point tag. "" for master-facing/fault bus, "D:" for the DUT-facing instance.
+module axi4l_checker #(parameter string PT = "") (axi4l_if vif);
   import tb_pkg::*;
 
   function automatic void rpt(vcat_e c, string ch, string m);
-    void'(viol_mon::report(c, ch, $time, m, 1'b1));
+    void'(viol_mon::report(c, {PT, ch}, $time, (PT == "") ? m : {m, " (DUT-facing)"}, 1'b1));
   endfunction
 
   default clocking @(posedge vif.ACLK); endclocking

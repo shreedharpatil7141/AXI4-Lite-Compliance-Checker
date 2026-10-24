@@ -45,8 +45,15 @@ class monitor;
     b_seen = 0; r_seen = 0; b_vld_c = 0; r_vld_c = 0;
   endfunction
 
+  // complete writes (AW and W both accepted) still waiting for a response
   function int unsigned pend_wr();
-    return aw_q.size() + w_d.size();
+    return (aw_q.size() < w_d.size()) ? aw_q.size() : w_d.size();
+  endfunction
+
+  // write requests with only one of AW/W accepted (incomplete request)
+  function int unsigned inc_wr();
+    return (aw_q.size() > w_d.size()) ? (aw_q.size() - w_d.size())
+                                      : (w_d.size() - aw_q.size());
   endfunction
 
   function int unsigned pend_rd();

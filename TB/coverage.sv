@@ -63,7 +63,7 @@ class cov_collector;
 
   covergroup cg_neg;
     option.per_instance = 1;
-    cp_cat: coverpoint v_cat { bins cat[] = {[0:10]}; }
+    cp_cat: coverpoint v_cat { bins cat[] = {[0:NUM_VCAT-1]}; }
   endgroup
 
   function new(mailbox #(obs_txn) m, int unsigned depth, int wr_base, int rd_base);
