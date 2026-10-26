@@ -52,6 +52,11 @@ module tb;
   int unsigned maskm = 0;
   int unsigned injout = 0;   // +INJOUT=1: inject an unexpected violation between tests (final-status proof)
   int unsigned isoleak = 0;  // +ISOLEAK=1: disable DUT isolation (isolation-check proof)
+  int unsigned awprobem = 0; // +AWPROBE=1: golden and mutant-17 directed check
+  int unsigned dedupm = 0;   // +DEDUP=1: duplicate/distinct same-time report check
+  int unsigned mutclassm = 0; // +MUTCLASSCHECK=1: mutation-classifier semantic self-check
+  int unsigned skewcovm = 0; // +COVSKEW=1: directed AW/W handshake-skew coverage check
+  int unsigned reqstallcovm = 0; // +COVREQ=1: directed AW/W/AR request-stall coverage check
   int unsigned n_ovr = 0;
   int unsigned depth = 16;
   bit [63:0]   prior = 64'h0;
@@ -73,6 +78,9 @@ module tb;
   int unsigned mask_run = 0, mask_ok = 0;
   int unsigned sum_test_unexp = 0;   // unexpected violations inside test windows
   int unsigned inj_mis = 0;          // injected-latency cross-check mismatches (informational)
+  int unsigned iso_ref_events = 0, iso_ref_channel_cycles = 0, iso_ref_clock_cycles = 0;
+  logic [7:0] iso_ref_prev = '0;
+  bit iso_metric_check_failed = 1'b0;
 
   `include "fault_tasks.sv"
   `include "mutant_tasks.sv"
@@ -84,6 +92,47 @@ module tb;
     ARESETN <= 1'b1;
     repeat (2) @(posedge ACLK);
   endtask
+
+  // Independent testbench oracle: count each unselected DUT response pin,
+  // then compare totals after the DUT's clocked accounting has settled.
+  always @(posedge ACLK) begin : iso_metric_oracle
+    logic [7:0] active;
+    bit any_active;
+    if (ARESETN !== 1'b1) begin
+      iso_ref_prev = '0;
+    end else begin
+      active[0] = !dut.sr && (dut.ri.BVALID === 1'b1);
+      active[1] = !dut.sr && (dut.ri.RVALID === 1'b1);
+      active[2] = !dut.sg && (dut.gi.BVALID === 1'b1);
+      active[3] = !dut.sg && (dut.gi.RVALID === 1'b1);
+      active[4] = !dut.sm && (dut.mi.BVALID === 1'b1);
+      active[5] = !dut.sm && (dut.mi.RVALID === 1'b1);
+      active[6] = !dut.sx && (dut.xi.BVALID === 1'b1);
+      active[7] = !dut.sx && (dut.xi.RVALID === 1'b1);
+      any_active = 1'b0;
+      for (int i = 0; i < 8; i++) begin
+        if (active[i] === 1'b1) begin
+          iso_ref_channel_cycles++;
+          any_active = 1'b1;
+          if (iso_ref_prev[i] !== 1'b1) iso_ref_events++;
+        end
+      end
+      if (any_active) iso_ref_clock_cycles++;
+      iso_ref_prev = active;
+    end
+  end
+
+  always @(negedge ACLK) begin
+    if (ARESETN === 1'b1 && !iso_metric_check_failed &&
+        ((dut.iso_viol_events !== iso_ref_events) ||
+         (dut.iso_viol_channel_cycles !== iso_ref_channel_cycles) ||
+         (dut.iso_viol_clock_cycles !== iso_ref_clock_cycles))) begin
+      iso_metric_check_failed = 1'b1;
+      $error("ISO metric accounting mismatch: DUT events/channel_cycles/clock_cycles=%0d/%0d/%0d oracle=%0d/%0d/%0d",
+             dut.iso_viol_events, dut.iso_viol_channel_cycles, dut.iso_viol_clock_cycles,
+             iso_ref_events, iso_ref_channel_cycles, iso_ref_clock_cycles);
+    end
+  end
 
   // L1 check: fixed cfg -> min==max==base+cfg ; random (-1) -> base..base+10
   function automatic bit lat_chk(int k, int cfg, int base);
@@ -195,14 +244,15 @@ module tb;
     if (ok) tests_pass++; else tests_fail++;
 
     // name,seed,gen,accepted,completed,wrL1,wrL3,rdL1,rdL3,timeouts,mismatch,viol,goals_new,goals_cum,cycles,abort,status
-    if (!rt_quiet)
-    $display("RESULT,%s,%0d,%0d,%0d,%0d,%s,%s,%s,%s,%0d,%0d,%0d,%0d,%0d/%0d,%0d,%0d,%s",
-             c.name, c.seed, gen.num_gen, acc, done,
-             env.scb.lat_str(0,0), env.scb.lat_str(0,2),
-             env.scb.lat_str(1,0), env.scb.lat_str(1,2),
-             tos, mism, nviol,
-             env.goals_hit() - g0, env.goals_hit(), env.cov.tot,
-             env.mon.cycle - cyc0, abt, ok ? "PASS" : "FAIL");
+    if (!rt_quiet) begin
+      $display("RESULT,%s,%0d,%0d,%0d,%0d,%s,%s,%s,%s,%0d,%0d,%0d,%0d,%0d/%0d,%0d,%0d,%s",
+               c.name, c.seed, gen.num_gen, acc, done,
+               env.scb.lat_str(0,0), env.scb.lat_str(0,2),
+               env.scb.lat_str(1,0), env.scb.lat_str(1,2),
+               tos, mism, nviol,
+               env.goals_hit() - g0, env.goals_hit(), env.cov.tot,
+               env.mon.cycle - cyc0, abt, ok ? "PASS" : "FAIL");
+    end
     // DUT-side (dbus) L1 and injected-delay cross-check
     if (!rt_quiet)
     $display("DLAT,%s,dut_wrL1=%s,dut_rdL1=%s,inj_wr=%s,inj_rd=%s",
@@ -375,6 +425,9 @@ module tb;
       bef[i]   = viol_mon::cnt[i];
       bef_d[i] = viol_mon::cnt_dut[i];
     end
+    // The control exposes B withdrawal at both observation points. With the
+    // response delay, only the DUT-facing B observation is expected.
+    viol_mon::set_expect(V_VALID_WITHDRAWAL, (cb == 0) ? "B" : "D:B");
 
     gen.wr(32'h10, 32'hC0DEC0DE, 4'hF, 0, 0, 3);   // BREADY held low 3 cycles after BVALID seen
     gen.rd(32'h10, 0, 0);
@@ -392,17 +445,252 @@ module tb;
       if (i != vi) other += viol_mon::cnt[i] - bef[i];
 
     if (cb == 0) begin
-      ok = (vw_bus >= 1) && (vw_dut >= 1) && (other == 0);
+      ok = (vw_bus == 1) && (vw_dut == 1) && (other == 0);
       verdict = "VISIBLE_AT_BOTH(control)";
     end else begin
-      ok = (vw_bus == 0) && (vw_dut >= 1) && (other == 0);
+      ok = (vw_bus == 0) && (vw_dut == 1) && (other == 0);
       verdict = "MASKED_AT_BUS_CAUGHT_AT_DUT";
     end
     mask_run++;
     if (ok) mask_ok++;
     $display("MASKRES,b_delay=%0d,withdrawal_at_bus=%0d,withdrawal_at_dut=%0d,other_hits=%0d,%s,%s",
              cb, vw_bus, vw_dut, other, verdict, ok ? "PASS" : "FAIL");
+    viol_mon::clear_expect();
     viol_mon::set_ctx("between_tests");
+  endtask
+
+  task automatic run_dedup_check();
+    int unsigned c0, d0, u0;
+    time         et;
+    bit          ok;
+    c0 = viol_mon::cnt[int'(V_VALID_WITHDRAWAL)];
+    d0 = viol_mon::dup_cnt;
+    u0 = viol_mon::unexp_hits;
+    et = $time;
+    viol_mon::set_expect(V_VALID_WITHDRAWAL, "DEDUP");
+    void'(viol_mon::report(V_VALID_WITHDRAWAL, "DEDUP", et, "first observation", 1'b1, "T01"));
+    void'(viol_mon::report(V_VALID_WITHDRAWAL, "DEDUP", et, "duplicate wording", 1'b1, "T01"));
+    void'(viol_mon::report(V_VALID_WITHDRAWAL, "DEDUP", et, "independent event", 1'b1, "T02"));
+    ok = ((viol_mon::cnt[int'(V_VALID_WITHDRAWAL)] - c0) == 2) &&
+         ((viol_mon::dup_cnt - d0) == 1) &&
+         ((viol_mon::unexp_hits - u0) == 0) && (viol_mon::exp_hits == 2);
+    $display("DEDUPTEST,same_event_suppressed=%0d,distinct_same_time_preserved=%0d,%s",
+             (viol_mon::dup_cnt - d0),
+             (viol_mon::cnt[int'(V_VALID_WITHDRAWAL)] - c0) - 1,
+             ok ? "PASS" : "FAIL");
+    viol_mon::clear_expect();
+  endtask
+
+  // Opt-in native coverage probe. The printed class is always derived from
+  // monitor-recorded AW/W handshake cycles, while the requested delays only
+  // select deterministic stimulus points.
+  task automatic run_aww_skew_cov();
+    generator    gen;
+    int unsigned aw_delay [0:6], w_delay [0:6];
+    int unsigned base, target, completed0, timeout0, aborted0, samples0, order_goals_hit;
+    int unsigned violations0, unexpected0;
+    bit          sample_seen, all_ok;
+
+    if (dutname != "ram")
+      $fatal(1, "COVSKEW requires +DUT=ram");
+
+    u_shim.cfg_aw = 0; u_shim.cfg_w = 0; u_shim.cfg_ar = 0;
+    u_shim.cfg_b = 0;  u_shim.cfg_r = 0;
+    u_shim.cfg_seed = seed;
+    u_shim.cfg_fault = 0;
+    do_reset();
+    env.scb.clear_stats();
+    dprobe.clear();
+
+    aw_delay[0] = 0; w_delay[0] = 0;
+    aw_delay[1] = 0; w_delay[1] = 1;
+    aw_delay[2] = 0; w_delay[2] = 3;
+    aw_delay[3] = 0; w_delay[3] = 6;
+    aw_delay[4] = 1; w_delay[4] = 0;
+    aw_delay[5] = 3; w_delay[5] = 0;
+    aw_delay[6] = 6; w_delay[6] = 0;
+
+    base = env.checked;
+    completed0 = env.drv.completed;
+    timeout0 = env.drv.timeouts;
+    aborted0 = env.drv.aborted;
+    violations0 = viol_mon::total();
+    unexpected0 = viol_mon::unexp_hits;
+    samples0 = env.cov.aww_skew_samples;
+    viol_mon::set_ctx("coverage_skew");
+    gen = new(env.g2d, seed, depth);
+    all_ok = 1'b1;
+
+    for (int i = 0; i < 7; i++) begin
+      int unsigned sample_before;
+      sample_before = env.cov.aww_skew_samples;
+      gen.wr(32'h20 + (i * 4), 32'hA5500000 + i, 4'hF,
+             aw_delay[i], w_delay[i], 0);
+      target = base + gen.num_gen;
+      sample_seen = 1'b0;
+      for (int cyc = 0; cyc < env.drv.timeout_cycles; cyc++) begin
+        @(negedge ACLK);
+        if (env.checked >= target && env.cov.aww_skew_samples > sample_before) begin
+          sample_seen = 1'b1;
+          break;
+        end
+      end
+      if (!sample_seen) begin
+        $display("AWWSKEW_SCENARIO,case=%0d,requested_aw_delay=%0d,requested_w_delay=%0d,FAIL=bounded_completion_timeout",
+                 i, aw_delay[i], w_delay[i]);
+        all_ok = 1'b0;
+        break;
+      end
+      $display("AWWSKEW_SAMPLE,case=%0d,requested_aw_delay=%0d,requested_w_delay=%0d,aw_handshake_cycle=%0d,w_handshake_cycle=%0d,measured_separation=%0d,class=%s",
+               i, aw_delay[i], w_delay[i], env.cov.last_aw_cycle, env.cov.last_w_cycle,
+               env.cov.last_aww_separation,
+               env.cov.aww_skew_name(env.cov.v_aww_skew_class));
+    end
+
+    env.cov.report_aww_skew();
+    order_goals_hit = 0;
+    foreach (env.cov.gname[i]) begin
+      if ((env.cov.gname[i] == "WR_ORD_AWFIRST" ||
+           env.cov.gname[i] == "WR_ORD_WFIRST" ||
+           env.cov.gname[i] == "WR_ORD_SAME") && env.cov.ghit[i])
+        order_goals_hit++;
+    end
+    $display("COVSKEW_ORDER custom_goals_hit=%0d/3", order_goals_hit);
+    if (order_goals_hit != 3) all_ok = 1'b0;
+    if ((env.cov.aww_skew_samples - samples0) != 7) all_ok = 1'b0;
+    for (int i = 0; i < 7; i++)
+      if (env.cov.aww_skew_bin_hits[i] == 0) all_ok = 1'b0;
+    if ((env.drv.completed - completed0) != 7 ||
+        (env.drv.timeouts - timeout0) != 0 ||
+        (env.drv.aborted - aborted0) != 0 ||
+        (viol_mon::total() - violations0) != 0 ||
+        (viol_mon::unexp_hits - unexpected0) != 0 ||
+        env.scb.errors() != 0 || env.mon.pend_wr() != 0 ||
+        env.mon.pend_rd() != 0 || env.mon.inc_wr() != 0)
+      all_ok = 1'b0;
+
+    $display("COVSKEW_RESULT,samples=%0d,custom_goals_defined=%0d,completed=%0d,timeouts=%0d,aborted=%0d,violations=%0d,%s",
+             env.cov.aww_skew_samples - samples0, env.cov.tot,
+             env.drv.completed - completed0, env.drv.timeouts - timeout0,
+             env.drv.aborted - aborted0, viol_mon::total() - violations0,
+             all_ok ? "PASS" : "FAIL");
+    viol_mon::set_ctx("between_tests");
+    if (!all_ok) $fatal(1, "COVSKEW directed coverage test failed");
+  endtask
+
+  // Opt-in master-visible request-stall coverage extension. It uses fixed
+  // shim delays as stimulus, but reports the monitor's sampled pin counts.
+  task automatic run_reqstall_cov();
+    generator gen;
+    int unsigned stall_value [0:4];
+    int unsigned target, done0, timeout0, aborted0, violations0, unexpected0;
+    int unsigned aw_samples0, w_samples0, ar_samples0;
+    bit sample_seen, all_ok;
+
+    if (dutname != "ram") $fatal(1, "COVREQ requires +DUT=ram");
+    stall_value[0] = 0; stall_value[1] = 1; stall_value[2] = 3;
+    stall_value[3] = 5; stall_value[4] = 11;
+    env.scb.clear_stats();
+    dprobe.clear();
+    gen = new(env.g2d, seed, depth);
+    all_ok = 1'b1;
+    done0 = env.drv.completed; timeout0 = env.drv.timeouts;
+    aborted0 = env.drv.aborted; violations0 = viol_mon::total();
+    unexpected0 = viol_mon::unexp_hits;
+    aw_samples0 = env.cov.req_stall_samples[0];
+    w_samples0 = env.cov.req_stall_samples[1];
+    ar_samples0 = env.cov.req_stall_samples[2];
+    viol_mon::set_ctx("coverage_reqstall");
+
+    // AW-focused writes: W and AR are configured for zero injector delay.
+    for (int i = 0; i < 5; i++) begin
+      int unsigned before_aw, before_w;
+      before_aw = env.cov.req_stall_samples[0];
+      before_w = env.cov.req_stall_samples[1];
+      u_shim.cfg_aw = int'(stall_value[i]); u_shim.cfg_w = 0; u_shim.cfg_ar = 0;
+      u_shim.cfg_b = 0; u_shim.cfg_r = 0; u_shim.cfg_seed = seed; u_shim.cfg_fault = 0;
+      do_reset();
+      gen.wr(32'h40 + (i * 4), 32'hA5700000 + i, 4'hF, 0, 0, 0);
+      target = env.checked + 1;
+      sample_seen = 1'b0;
+      for (int cyc = 0; cyc < env.drv.timeout_cycles; cyc++) begin
+        @(negedge ACLK);
+        if (env.checked >= target && env.cov.req_stall_samples[0] > before_aw &&
+            env.cov.req_stall_samples[1] > before_w) begin sample_seen = 1'b1; break; end
+      end
+      $display("REQSTALL_SAMPLE,channel=AW,requested_delay=%0d,measured_stall_cycles=%0d,%s",
+               stall_value[i], env.cov.last_aw_stall_cycles, sample_seen ? "OBSERVED" : "FAIL");
+      if (!sample_seen) begin all_ok = 1'b0; break; end
+    end
+
+    // W-focused writes: AW and AR are configured for zero injector delay.
+    if (all_ok) begin
+      for (int i = 0; i < 5; i++) begin
+        int unsigned before_aw, before_w;
+        before_aw = env.cov.req_stall_samples[0];
+        before_w = env.cov.req_stall_samples[1];
+        u_shim.cfg_aw = 0; u_shim.cfg_w = int'(stall_value[i]); u_shim.cfg_ar = 0;
+        u_shim.cfg_b = 0; u_shim.cfg_r = 0; u_shim.cfg_seed = seed; u_shim.cfg_fault = 0;
+        do_reset();
+        gen.wr(32'h60 + (i * 4), 32'hA5800000 + i, 4'hF, 0, 0, 0);
+        target = env.checked + 1;
+        sample_seen = 1'b0;
+        for (int cyc = 0; cyc < env.drv.timeout_cycles; cyc++) begin
+          @(negedge ACLK);
+          if (env.checked >= target && env.cov.req_stall_samples[0] > before_aw &&
+              env.cov.req_stall_samples[1] > before_w) begin sample_seen = 1'b1; break; end
+        end
+        $display("REQSTALL_SAMPLE,channel=W,requested_delay=%0d,measured_stall_cycles=%0d,%s",
+                 stall_value[i], env.cov.last_w_stall_cycles, sample_seen ? "OBSERVED" : "FAIL");
+        if (!sample_seen) begin all_ok = 1'b0; break; end
+      end
+    end
+
+    // AR-focused reads use addresses written above and configure AW/W to zero.
+    if (all_ok) begin
+      for (int i = 0; i < 5; i++) begin
+        int unsigned before_ar;
+        before_ar = env.cov.req_stall_samples[2];
+        u_shim.cfg_aw = 0; u_shim.cfg_w = 0; u_shim.cfg_ar = int'(stall_value[i]);
+        u_shim.cfg_b = 0; u_shim.cfg_r = 0; u_shim.cfg_seed = seed; u_shim.cfg_fault = 0;
+        do_reset();
+        gen.rd(32'h40 + (i * 4), 0, 0);
+        target = env.checked + 1;
+        sample_seen = 1'b0;
+        for (int cyc = 0; cyc < env.drv.timeout_cycles; cyc++) begin
+          @(negedge ACLK);
+          if (env.checked >= target && env.cov.req_stall_samples[2] > before_ar) begin
+            sample_seen = 1'b1; break;
+          end
+        end
+        $display("REQSTALL_SAMPLE,channel=AR,requested_delay=%0d,measured_stall_cycles=%0d,%s",
+                 stall_value[i], env.cov.last_ar_stall_cycles, sample_seen ? "OBSERVED" : "FAIL");
+        if (!sample_seen) begin all_ok = 1'b0; break; end
+      end
+    end
+
+    env.cov.report_req_stall();
+    for (int ch = 0; ch < 3; ch++)
+      for (int b = 0; b < 5; b++)
+        if (env.cov.req_stall_bin_hits[ch][b] == 0) all_ok = 1'b0;
+    if ((env.cov.req_stall_samples[0] - aw_samples0) != 10 ||
+        (env.cov.req_stall_samples[1] - w_samples0) != 10 ||
+        (env.cov.req_stall_samples[2] - ar_samples0) != 5 ||
+        (env.drv.completed - done0) != 15 ||
+        (env.drv.timeouts - timeout0) != 0 || (env.drv.aborted - aborted0) != 0 ||
+        (viol_mon::total() - violations0) != 0 ||
+        (viol_mon::unexp_hits - unexpected0) != 0 || env.scb.errors() != 0 ||
+        env.mon.pend_wr() != 0 || env.mon.pend_rd() != 0 || env.mon.inc_wr() != 0)
+      all_ok = 1'b0;
+    $display("COVREQ_RESULT,AW_samples=%0d,W_samples=%0d,AR_samples=%0d,completed=%0d,timeouts=%0d,aborted=%0d,violations=%0d,%s",
+             env.cov.req_stall_samples[0] - aw_samples0,
+             env.cov.req_stall_samples[1] - w_samples0,
+             env.cov.req_stall_samples[2] - ar_samples0,
+             env.drv.completed - done0, env.drv.timeouts - timeout0,
+             env.drv.aborted - aborted0, viol_mon::total() - violations0,
+             all_ok ? "PASS" : "FAIL");
+    viol_mon::set_ctx("between_tests");
+    if (!all_ok) $fatal(1, "COVREQ directed request-stall coverage test failed");
   endtask
 
   // ======================= main =======================
@@ -418,6 +706,11 @@ module tb;
     if (!$value$plusargs("MASK=%d",  maskm))   maskm   = 0;
     if (!$value$plusargs("INJOUT=%d", injout))  injout  = 0;
     if (!$value$plusargs("ISOLEAK=%d", isoleak)) isoleak = 0;
+    if (!$value$plusargs("AWPROBE=%d", awprobem)) awprobem = 0;
+    if (!$value$plusargs("DEDUP=%d", dedupm)) dedupm = 0;
+    if (!$value$plusargs("MUTCLASSCHECK=%d", mutclassm)) mutclassm = 0;
+    if (!$value$plusargs("COVSKEW=%d", skewcovm)) skewcovm = 0;
+    if (!$value$plusargs("COVREQ=%d", reqstallcovm)) reqstallcovm = 0;
     if (!$value$plusargs("N=%d",     n_ovr))   n_ovr   = 0;
     if (!$value$plusargs("PRIOR=%h", prior))   prior   = 64'h0;
     if (!$value$plusargs("TEST=%s",  tname))   tname   = "regress";
@@ -483,7 +776,32 @@ module tb;
     do_reset();
     viol_mon::set_ctx("between_tests");
 
-    if (fault != 0) begin
+    if (mutclassm != 0) begin
+      run_mut_class_check();
+      $finish;
+    end else if (reqstallcovm != 0) begin
+      run_reqstall_cov();
+      $finish;
+    end else if (skewcovm != 0) begin
+      run_aww_skew_cov();
+      $finish;
+    end else if (awprobem != 0) begin
+      bit ctl_ok, mut_ok;
+      if (dutname != "rtlmut") begin
+        $fatal(1, "AWPROBESUM FAIL,requires_DUT=rtlmut");
+      end else begin
+        run_second_aw_probe(0, ctl_ok);
+        run_second_aw_probe(17, mut_ok);
+        $display("AWPROBESUM,golden=%0d,mutant17=%0d,%s",
+                 ctl_ok, mut_ok, (ctl_ok && mut_ok) ? "PASS" : "FAIL");
+        if (!ctl_ok || !mut_ok)
+          $fatal(1, "AWPROBESUM failed: golden=%0d mutant17=%0d", ctl_ok, mut_ok);
+      end
+      $finish;
+    end else if (dedupm != 0) begin
+      run_dedup_check();
+      $finish;
+    end else if (fault != 0) begin
       lo = (fault == 100) ? 1 : fault;
       hi = (fault == 100) ? 18 : fault;
       det = 0; mis = 0;
@@ -543,17 +861,25 @@ module tb;
         repeat (3) @(posedge ACLK);
       end
 
+      // The oracle samples on posedge and compares on negedge. Wait through
+      // that comparison before reading its failure flag in the final report.
+      @(negedge ACLK);
+      #1;
+
       if (env.mon.n_reset > 0) env.cov.hit("RST_OBSERVED");
       viol_mon::summary();
       env.cov.report(prior, env.mon.n_reset);
       $display("REGRESS dut=%s tests=%0d pass=%0d fail=%0d goals_hit=%0d/%0d",
                dutname, tests_run, tests_pass, tests_fail, env.goals_hit(), env.cov.tot);
-      $display("GLOBAL unexpected_total=%0d in_tests=%0d outside_tests=%0d iso_viol=%0d dut_facing=%0d inj_mismatch=%0d",
+      $display("GLOBAL unexpected_total=%0d in_tests=%0d outside_tests=%0d iso_event_starts=%0d iso_response_channel_cycles=%0d iso_unique_clock_cycles=%0d iso_metric_oracle=%s dut_facing=%0d inj_mismatch=%0d",
                viol_mon::unexp_hits, sum_test_unexp, viol_mon::unexp_hits - sum_test_unexp,
-               dut.iso_viol, viol_mon::total_dut(), inj_mis);
+               dut.iso_viol_events, dut.iso_viol_channel_cycles, dut.iso_viol_clock_cycles,
+               iso_metric_check_failed ? "FAIL" : "PASS",
+               viol_mon::total_dut(), inj_mis);
       $display("STAGE9 mode=%s dut=%s seed=%0d mut=%0d cycles=%0d %s",
                tname, dutname, seed, mut, env.mon.cycle,
-               (tests_fail == 0 && viol_mon::unexp_hits == 0 && dut.iso_viol == 0) ? "PASS" : "FAIL");
+               (tests_fail == 0 && viol_mon::unexp_hits == 0 && dut.iso_viol_events == 0 &&
+                !iso_metric_check_failed) ? "PASS" : "FAIL");
       $finish;
     end
   end

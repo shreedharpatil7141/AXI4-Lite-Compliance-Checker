@@ -5,11 +5,17 @@
 //   3 = RTL mutant library (verification only, +DUT=rtlmut, mutant chosen by mutid; 0 = control)
 // Master-driven VALID and READY signals reach ONLY the selected DUT. Unselected DUTs
 // see them tied low, so they cannot accept requests or change state.
-// iso_viol counts any response VALID from an unselected DUT (must stay 0).
+// Cumulative isolation metrics cover each unselected DUT's B/R response pin:
+// starts count a low-to-high violation transition, channel cycles count every
+// active pin sample, and clock cycles count once if any pin violates that edge.
+// With leak enabled, latency/backpressure can keep several unselected responses active.
 module dut_sel (input logic ACLK, input logic ARESETN, axi4l_if.slave s);
   logic [1:0]  sel = 2'd0;
   logic        leak = 1'b0;   // verification-only: +ISOLEAK=1 disables gating to prove the isolation check can fail
-  int unsigned iso_viol = 0;
+  int unsigned iso_viol_channel_cycles = 0;
+  int unsigned iso_viol_clock_cycles = 0;
+  int unsigned iso_viol_events = 0;
+  logic [7:0] iso_prev = '0; // B/R VALID state for RAM, GPIO, RAM mutant, RTL mutant
   int unsigned mutid = 0;      // mutant library selector (tb sets it; 0 = unmodified control)
   logic        minit = 1'b0;   // mutant library full re-initialization strobe (tb)
   int unsigned m_trig, m_pdiff;
@@ -65,10 +71,23 @@ module dut_sel (input logic ACLK, input logic ARESETN, axi4l_if.slave s);
   // isolation check: an unselected DUT must never raise a response VALID
   always @(posedge ACLK) begin
     if (ARESETN === 1'b1) begin
-      if (!sr && (ri.BVALID === 1'b1 || ri.RVALID === 1'b1)) iso_viol++;
-      if (!sg && (gi.BVALID === 1'b1 || gi.RVALID === 1'b1)) iso_viol++;
-      if (!sm && (mi.BVALID === 1'b1 || mi.RVALID === 1'b1)) iso_viol++;
-      if (!sx && (xi.BVALID === 1'b1 || xi.RVALID === 1'b1)) iso_viol++;
+      bit any_iso_violation;
+      any_iso_violation = 1'b0;
+      if (!sr && ri.BVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[0]) iso_viol_events++; end
+      if (!sr && ri.RVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[1]) iso_viol_events++; end
+      if (!sg && gi.BVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[2]) iso_viol_events++; end
+      if (!sg && gi.RVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[3]) iso_viol_events++; end
+      if (!sm && mi.BVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[4]) iso_viol_events++; end
+      if (!sm && mi.RVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[5]) iso_viol_events++; end
+      if (!sx && xi.BVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[6]) iso_viol_events++; end
+      if (!sx && xi.RVALID === 1'b1) begin iso_viol_channel_cycles++; any_iso_violation = 1'b1; if (!iso_prev[7]) iso_viol_events++; end
+      if (any_iso_violation) iso_viol_clock_cycles++;
+      iso_prev <= {!sx && xi.RVALID === 1'b1, !sx && xi.BVALID === 1'b1,
+                   !sm && mi.RVALID === 1'b1, !sm && mi.BVALID === 1'b1,
+                   !sg && gi.RVALID === 1'b1, !sg && gi.BVALID === 1'b1,
+                   !sr && ri.RVALID === 1'b1, !sr && ri.BVALID === 1'b1};
+    end else begin
+      iso_prev <= '0;
     end
   end
 endmodule

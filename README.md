@@ -27,11 +27,12 @@ different DUTs (an AXI4-Lite RAM and an AXI4-Lite GPIO block). Only the referenc
 12. [Regression output format](#12-regression-output-format)
 13. [EDA Playground setup](#13-eda-playground-setup)
 14. [Run options](#14-run-options)
-15. [Verified results](#15-verified-results)
-16. [Integrating a new AXI4-Lite slave](#16-integrating-a-new-axi4-lite-slave)
-17. [Design decisions and lessons learned](#17-design-decisions-and-lessons-learned)
-18. [Limitations](#18-limitations)
-19. [Resume summary](#19-resume-summary)
+15. [Mutation diagnosis and reproducibility](#15-mutation-diagnosis-and-reproducibility)
+16. [Verified results](#16-verified-results)
+17. [Integrating a new AXI4-Lite slave](#17-integrating-a-new-axi4-lite-slave)
+18. [Design decisions and lessons learned](#18-design-decisions-and-lessons-learned)
+19. [Limitations](#19-limitations)
+20. [Resume summary](#20-resume-summary)
 
 ---
 
@@ -648,6 +649,12 @@ Legal runs should exit 0.
 | `+FAULT=100` | All 18 assertion fault proofs |
 | `+FAULT=1..18` | One fault proof |
 | `+MUT=1` | Scoreboard sensitivity check: reference model ignores strobes. Not a DUT change |
+| `+MUTCLASSCHECK=1` | Synthetic mutation-classifier self-check; emits `MUTCLASSCASE` and `MUTCLASSSUM` |
+| `+MUTSWEEP=1` | Run the configured mutant range (control first); requires `+DUT=rtlmut` implicitly |
+| `+MUTFIRST=n +MUTLAST=n` | Bound mutant IDs (1–20); use the same value to focus one mutant |
+| `+MUTFULL=1` | Run all 14 test configurations for each mutant; default stops after the first test with a retained violation |
+| `+MUTVERBOSE=1` | Preserve ordinary `VIOL`, `RESULT` and `DLAT` output during mutation evaluation |
+| `+MUTVAL=0` | Skip the mutation exposure/validation phase; default is enabled |
 | `+PRIOR=<hex>` | Merge a `COVMASK` printed by an earlier run |
 
 Examples:
@@ -666,9 +673,63 @@ Note: the earlier per-run delay plusargs (`+LAT`, `+AWD`, `+WD`, `+ARD`, `+BD`, 
 
 ---
 
-## 15. Verified results
+## 15. Mutation diagnosis and reproducibility
 
-All results below were produced on EDA Playground with Cadence Xcelium 25.03 and checked from the printed transcript.
+The classifier evaluates retained violation records from the scored stimulus window. Its output
+distinguishes these questions rather than collapsing them into one detection bit:
+
+| Field | Meaning |
+|---|---|
+| `detected` | At least one violation record was retained in the scored window; `trig` and `pdiff` report mutation activation and observed pin difference separately |
+| `det_ok`, `ch_ok`, `cat_ok` | Expected detector present; expected detector plus normalized logical channel present; full expected detector/channel/category tuple present, respectively |
+| `expected_seen` | The frozen expected detector/channel/category tuple appeared anywhere in the scored records |
+| `primary_match` | That exact tuple is among the diagnostics at the earliest retained event timestamp |
+| `primary_diag` / `primary_count` | Unique detector/logical-channel/category tuples at the earliest timestamp; multiple tuples are co-primary and classify as `AMBIGUOUS` when the expected tuple is also present |
+| `got` | The first record in violation-monitor insertion order, retained for compatibility; it is not the primary-selection rule |
+| `secondary_records` | Retained records strictly later than the earliest event, excluding later instances of the expected tuple |
+| `unexp_secondary_records` | Secondary records not allowed by the mutant-specific detector, normalized channel and category rule |
+| `unexp_sec` / `unexp_ids` | Number/list of distinct unexpected detector identities; this is not an event count |
+| `sec` | Unique detector IDs from later secondary records, including allowed IDs; co-primary records are listed in `primary_diag` instead |
+| `lat_pin_cyc`, `lat_win_cyc` | Cycles from first observed mutation pin difference and scored-window start, respectively, to the earliest retained diagnostic timestamp (the primary timestamp) |
+| `lat_expected_pin_cyc`, `lat_expected_win_cyc` | Same references to the earliest occurrence of the frozen expected tuple; `na` means the timestamp/reference was unavailable, and `pre_reference` means the report predates the reference |
+
+Classification precedence is: `CONTROL_OK/FAIL`; mutation validity/exercise checks; `MISDIAGNOSED`
+if the expected tuple is absent or not primary; `AMBIGUOUS` if the expected tuple is co-primary
+with another distinct tuple; `NOISY` if a later, disallowed secondary record exists; otherwise
+`KILLED`. Allowed secondary records remain visible in `sec`; the allowlist does not suppress
+records or checker reports. `MUTRATE detection_rate` is the fraction of denominator mutants with
+at least one retained checker violation record. It is not a pin-activation rate or proof of exact
+diagnosis. `expected_diag_rate`, `primary_diag_rate`, and `clean_kill_rate` report those separate
+properties. `not_exercised` and `invalid` are excluded from that denominator; ambiguous outcomes
+are included.
+
+The opt-in `+MUTCLASSCHECK=1` mode covers an exact primary match, wrong earliest diagnostic with
+the expected tuple later, absent expected tuple, allowed and disallowed secondary records, a
+co-primary case, checker/procedural duplicate reconciliation, and dedup reset. These are
+testbench self-checks over synthetic violation records; they do not replace end-to-end mutant
+runs. Simulator process exit status is independent evidence: interpret the printed classifier
+verdict and simulator exit code separately, and investigate any mismatch between them.
+
+Example Xcelium runs (compile options remain `-timescale 1ns/1ns -sysv -coverage all
+-covoverwrite +access+r`):
+
+```text
++DUT=ram +TEST=regress +SEED=7
++MUTCLASSCHECK=1 +SEED=7
++DUT=rtlmut +MUTSWEEP=1 +MUTFIRST=1 +MUTLAST=20 +MUTFULL=1 +MUTVERBOSE=1 +SEED=7
++DUT=rtlmut +MUTSWEEP=1 +MUTFIRST=14 +MUTLAST=14 +MUTFULL=1 +MUTVERBOSE=1 +SEED=7
+```
+
+Record the source revision and dirty diff, Xcelium build, complete compile/run command, seed,
+and full transcript for every reported experiment. The mutation results in the next section are
+historical observations from the earlier classifier/source state; they must not be presented as
+results of the revised classifier until rerun.
+
+## 16. Verified results
+
+The following are previously reported results produced on EDA Playground with Cadence Xcelium
+25.03. They predate the classifier changes documented in Section 15 and are not validation of
+the revised classifier.
 
 | Run | Result |
 |---|---|
@@ -704,7 +765,7 @@ Mutation note: under `+MUT=1`, `t_boundary` (full-strobe writes only) still pass
 
 ---
 
-## 16. Integrating a new AXI4-Lite slave
+## 17. Integrating a new AXI4-Lite slave
 
 1. **Instantiate the DUT** in `dut_sel.sv` (or directly in `testbench.sv`) on an `axi4l_if.slave` port. Do not modify the checker.
 2. **Write a `ref_model` subclass** (see `gpio_model.sv`): override `do_write(addr, data, strb)` returning the expected response, and `do_read(addr, data, rsp)`.
@@ -717,7 +778,7 @@ No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_
 
 ---
 
-## 17. Design decisions and lessons learned
+## 18. Design decisions and lessons learned
 
 - **Separate checker, monitor and model.** Protocol checking uses interface signals only. Data checking lives in the model. This is what makes reuse across DUTs possible.
 - **Passive monitor.** Coverage and scoreboard see only completed handshakes. A generated but unfinished transaction never counts.
@@ -735,7 +796,7 @@ No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_
 
 ---
 
-## 18. Limitations
+## 19. Limitations
 
 - One master, one outstanding transaction at a time, two DUTs.
 - Reset under traffic covers a **stalled read response only**. Reset during an in-flight write is not tested, because a write can commit before its response and the model cannot know it.
@@ -755,7 +816,7 @@ No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_
 
 ---
 
-## 19. Resume summary
+## 20. Resume summary
 
 **DUT-Agnostic AXI4-Lite Compliance Checker with Latency Injection and Violation-Coverage Closure** (SystemVerilog, Cadence Xcelium, EDA Playground)
 

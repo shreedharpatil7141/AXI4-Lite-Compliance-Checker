@@ -32,6 +32,7 @@ class viol_mon;
   static string       ctx = "init";        // test / seed context printed on every VIOL line
   static int unsigned dup_cnt    = 0;
   static int unsigned exp_hits   = 0;
+  static int unsigned exp_total  = 0;
   static int unsigned unexp_hits = 0;
   static int unsigned unexp_base = 0;
   static bit          exp_en     = 1'b0;
@@ -88,11 +89,24 @@ class viol_mon;
     ctx = s;
   endfunction
 
+  // A channel expectation names the logical channel. The same observation
+  // may be reported on the master view (B) and DUT view (D:B).
+  static function bit expect_channel(string actual);
+    if (exp_ch == "" || actual == exp_ch) return 1'b1;
+    if (actual.len() == exp_ch.len() + 2 && actual.substr(0, 1) == "D:" &&
+        actual.substr(2, actual.len() - 1) == exp_ch) return 1'b1;
+    return 1'b0;
+  endfunction
+
   static function int unsigned nrec();
     return recs.size();
   endfunction
 
   static function void reset_dedup();
+    // Clear both pending cross-source reconciliation and exact-event keys.
+    // Absolute timestamps normally make old keys inert, but retaining them
+    // violates the reset contract and can suppress a repeated event after reset.
+    seen.delete();
     pa_n.delete(); pa_t.delete(); pp_n.delete(); pp_t.delete();
   endfunction
 
@@ -122,7 +136,12 @@ class viol_mon;
     string k, k2, src;
     bit    is_exp;
     vrec_t r;
-    k  = $sformatf("%0d:%s:%0t", int'(c), ch, t);
+    // Include detector identity: separate checks can fire on one channel at the
+    // same timestamp. Repeated observations from the same detector still fold.
+    // One detector instance can report at most one sampled event per channel
+    // and timestamp. Detector identity distinguishes independent same-time
+    // events; the paired CHK/PROC unexpected-response path is reconciled below.
+    k  = $sformatf("%0d:%s:%0t:%s", int'(c), ch, t, det);
     k2 = $sformatf("%0d:%s", int'(c), ch);
     if (seen.exists(k)) begin
       dup_cnt++;
@@ -151,8 +170,9 @@ class viol_mon;
 
     cnt[int'(c)]++;
     if (ch.len() >= 2 && ch.substr(0, 1) == "D:") cnt_dut[int'(c)]++;
-    is_exp = exp_en && (c == exp_cat) && (exp_ch == "" || exp_ch == ch);
-    if (is_exp) exp_hits++; else unexp_hits++;
+    is_exp = exp_en && (c == exp_cat) && expect_channel(ch);
+    if (is_exp) begin exp_hits++; exp_total++; end
+    else unexp_hits++;
     r.cat = c; r.ch = ch; r.det = det; r.t = t; r.from_chk = from_chk;
     recs.push_back(r);
     if (!quiet)
@@ -172,7 +192,7 @@ class viol_mon;
     end
     $display("VSUM%s", s);
     $display("VSUM total=%0d expected=%0d unexpected=%0d dup_suppressed=%0d dut_facing=%0d",
-             total(), exp_hits, unexp_hits, dup_cnt, total_dut());
+             total(), exp_total, unexp_hits, dup_cnt, total_dut());
   endfunction
 endclass
 `endif

@@ -95,7 +95,7 @@ class scoreboard;
     if (o.rsp !== er) begin
       n_resp_mis++;
       void'(viol_mon::report(V_RESP_CODE_MISMATCH, "B", o.t_rsp,
-            $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0));
+            $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0, "S04"));
     end
     rec_lat(0, o);
   endfunction
@@ -108,12 +108,12 @@ class scoreboard;
     if (o.rsp !== er) begin
       n_resp_mis++;
       void'(viol_mon::report(V_RESP_CODE_MISMATCH, "R", o.t_rsp,
-            $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0));
+            $sformatf("addr=%h resp exp=%0b got=%0b", o.addr, er, o.rsp), 1'b0, "S05"));
     end
     if (o.data !== ed) begin
       n_data_mis++;
       void'(viol_mon::report(V_DATA_MISMATCH, "R", o.t_rsp,
-            $sformatf("addr=%h data exp=%h got=%h", o.addr, ed, o.data), 1'b0));
+            $sformatf("addr=%h data exp=%h got=%h", o.addr, ed, o.data), 1'b0, "S06"));
     end
     rec_lat(1, o);
   endfunction
@@ -149,12 +149,14 @@ class scoreboard;
             $sformatf("monitor_completed=%0d driver_completed=%0d", n_wr + n_rd, drv_done), 1'b0));
     end
     n_pend += pend_w + pend_r;
+    // S09 is the frozen detector for any accepted request left unanswered;
+    // the request index remains in the channel field for per-item accounting.
     for (int i = 0; i < (pend_w + pend_r); i++)
       void'(viol_mon::report(V_MISSING_RESP, $sformatf("REQ%0d", i), $time,
-            $sformatf("accepted request without response (wr_txn=%0d rd_txn=%0d)", pend_w, pend_r), 1'b0));
+            $sformatf("accepted request without response (wr_txn=%0d rd_txn=%0d)", pend_w, pend_r), 1'b0, "S09"));
     for (int i = 0; i < drv_to; i++)
       void'(viol_mon::report(V_RESP_TIMEOUT, $sformatf("DRV%0d", i), $time,
-            "driver bounded wait expired", 1'b0));
+            "driver bounded wait expired", 1'b0, "S10"));
   endfunction
 
   function int unsigned errors();

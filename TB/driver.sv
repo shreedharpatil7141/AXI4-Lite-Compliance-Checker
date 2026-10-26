@@ -112,9 +112,10 @@ class driver;
     @(posedge vif.ACLK);
     t.rsp   = vif.RRESP;
     t.rdata = vif.RDATA;
-    if (!vif.RVALID) begin
-      if (rst_seen) abort_flag = 1'b1; else t.timed_out = 1'b1;
-    end
+    if (rst_seen)
+      abort_flag = 1'b1;
+    else if (!vif.RVALID)
+      t.timed_out = 1'b1;
     vif.RREADY <= 1'b0;
   endtask
 
@@ -141,6 +142,101 @@ class driver;
     vif.ARVALID <= 1'b0;
     if (!ok) t.timed_out = 1'b1;
     else     wait_r(t);
+  endtask
+
+  // Directed capacity probe used by mutant 17. Keep all pin changes in the
+  // driver and sample READY on clock edges, like ordinary transactions.
+  task probe_second_aw(input bit [31:0] a1, input bit [31:0] a2,
+                       input bit [31:0] data1, input bit [31:0] data2,
+                       output bit probe_ok, output bit accepted_while_pending,
+                       output string failure);
+    int unsigned n;
+    bit accepted;
+    begin : probe_body
+    probe_ok = 1'b0;
+    accepted_while_pending = 1'b0;
+    failure = "";
+    vif.BREADY <= 1'b0; vif.WVALID <= 1'b0;
+    vif.AWADDR <= a1; vif.AWVALID <= 1'b1;
+    accepted = 1'b0;
+    for (n = 0; n < timeout_cycles && !accepted; n++) begin
+      @(posedge vif.ACLK);
+      if (vif.AWREADY === 1'b1) accepted = 1'b1;
+    end
+    if (!accepted) begin failure = "AW1 timeout"; disable probe_body; end
+    vif.AWVALID <= 1'b0;
+
+    // Keep the first write incomplete while presenting the second address.
+    vif.AWADDR <= a2; vif.AWVALID <= 1'b1;
+    for (n = 0; n < 3; n++) begin
+      @(posedge vif.ACLK);
+      if (vif.AWVALID && vif.AWREADY) begin
+        accepted_while_pending = 1'b1;
+        vif.AWVALID <= 1'b0;
+      end
+    end
+
+    vif.WDATA <= data1; vif.WSTRB <= 4'hF; vif.WVALID <= 1'b1;
+    accepted = 1'b0;
+    for (n = 0; n < timeout_cycles && !accepted; n++) begin
+      @(posedge vif.ACLK);
+      if (vif.WREADY === 1'b1) accepted = 1'b1;
+    end
+    if (!accepted) begin failure = "W1 timeout"; disable probe_body; end
+    vif.WVALID <= 1'b0;
+    accepted = 1'b0;
+    for (n = 0; n < timeout_cycles && !accepted; n++) begin
+      @(posedge vif.ACLK);
+      if (vif.BVALID === 1'b1) accepted = 1'b1;
+    end
+    if (!accepted) begin failure = "B1 timeout"; disable probe_body; end
+    vif.BREADY <= 1'b1;
+    @(posedge vif.ACLK);
+    if (vif.BVALID !== 1'b1) begin failure = "B1 handshake lost"; disable probe_body; end
+    vif.BREADY <= 1'b0;
+
+    if (!accepted_while_pending) begin
+      // Golden single-entry DUT releases AWREADY only after the first B
+      // handshake. The held second AW completes as a normal second write.
+      accepted = 1'b0;
+      for (n = 0; n < timeout_cycles && !accepted; n++) begin
+        @(posedge vif.ACLK);
+        if (vif.AWREADY === 1'b1) accepted = 1'b1;
+      end
+      if (!accepted) begin failure = "AW2 completion timeout"; disable probe_body; end
+      vif.AWVALID <= 1'b0;
+      vif.WDATA <= data2; vif.WSTRB <= 4'hF; vif.WVALID <= 1'b1;
+      accepted = 1'b0;
+      for (n = 0; n < timeout_cycles && !accepted; n++) begin
+        @(posedge vif.ACLK);
+        if (vif.WREADY === 1'b1) accepted = 1'b1;
+      end
+      if (!accepted) begin failure = "W2 timeout"; disable probe_body; end
+      vif.WVALID <= 1'b0;
+      accepted = 1'b0;
+      for (n = 0; n < timeout_cycles && !accepted; n++) begin
+        @(posedge vif.ACLK);
+        if (vif.BVALID === 1'b1) accepted = 1'b1;
+      end
+      if (!accepted) begin failure = "B2 timeout"; disable probe_body; end
+      vif.BREADY <= 1'b1; @(posedge vif.ACLK);
+      if (vif.BVALID !== 1'b1) begin failure = "B2 handshake lost"; disable probe_body; end
+      vif.BREADY <= 1'b0;
+    end else begin
+      // Mutant already consumed AW2. A second W is harmlessly accepted as a
+      // partial request, then the test resets to flush the DUT and monitor.
+      vif.WDATA <= data2; vif.WSTRB <= 4'hF; vif.WVALID <= 1'b1;
+      accepted = 1'b0;
+      for (n = 0; n < timeout_cycles && !accepted; n++) begin
+        @(posedge vif.ACLK);
+        if (vif.WREADY === 1'b1) accepted = 1'b1;
+      end
+      if (!accepted) begin failure = "W2 partial timeout"; disable probe_body; end
+      vif.WVALID <= 1'b0;
+    end
+    probe_ok = 1'b1;
+    end
+    vif.AWVALID <= 1'b0; vif.WVALID <= 1'b0; vif.BREADY <= 1'b0;
   endtask
 
   task run();
