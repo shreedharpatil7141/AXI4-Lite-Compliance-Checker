@@ -4,8 +4,15 @@
 module axi4l_checker #(parameter string PT = "") (axi4l_if vif);
   import tb_pkg::*;
 
+  // detector ID = first token of the message (A01 .. A16)
+  function automatic string det_of(string m);
+    for (int i = 0; i < m.len(); i++)
+      if (m.getc(i) == 8'h20) return m.substr(0, i - 1);
+    return m;
+  endfunction
+
   function automatic void rpt(vcat_e c, string ch, string m);
-    void'(viol_mon::report(c, {PT, ch}, $time, (PT == "") ? m : {m, " (DUT-facing)"}, 1'b1));
+    void'(viol_mon::report(c, {PT, ch}, $time, (PT == "") ? m : {m, " (DUT-facing)"}, 1'b1, det_of(m)));
   endfunction
 
   default clocking @(posedge vif.ACLK); endclocking

@@ -57,6 +57,14 @@ module tb;
   bit [63:0]   prior = 64'h0;
   string       tname = "regress";
   string       dutname = "ram";
+  int unsigned mutid_arg  = 0;   // +MUTID=n with +DUT=rtlmut: run the normal mode on mutant n (0 = control)
+  int unsigned mutsweep   = 0;   // +MUTSWEEP=1: structured evaluation of the mutant library
+  int unsigned mut_first  = 1;   // +MUTFIRST=a, +MUTLAST=b: sweep range (control always runs first)
+  int unsigned mut_last   = 20;
+  int unsigned mut_full   = 0;   // +MUTFULL=1: run all 14 tests per mutant (default: stop after first detecting test)
+  int unsigned mut_val    = 1;   // +MUTVAL=0: skip the validation (exposure) phase
+  int unsigned mut_verbose = 0;  // +MUTVERBOSE=1: keep VIOL/RESULT/DLAT lines during the sweep
+  bit          rt_quiet   = 1'b0;
 
   int unsigned tests_run  = 0;
   int unsigned tests_pass = 0;
@@ -67,6 +75,7 @@ module tb;
   int unsigned inj_mis = 0;          // injected-latency cross-check mismatches (informational)
 
   `include "fault_tasks.sv"
+  `include "mutant_tasks.sv"
 
   task automatic do_reset();
     ARESETN <= 1'b0;
@@ -186,6 +195,7 @@ module tb;
     if (ok) tests_pass++; else tests_fail++;
 
     // name,seed,gen,accepted,completed,wrL1,wrL3,rdL1,rdL3,timeouts,mismatch,viol,goals_new,goals_cum,cycles,abort,status
+    if (!rt_quiet)
     $display("RESULT,%s,%0d,%0d,%0d,%0d,%s,%s,%s,%s,%0d,%0d,%0d,%0d,%0d/%0d,%0d,%0d,%s",
              c.name, c.seed, gen.num_gen, acc, done,
              env.scb.lat_str(0,0), env.scb.lat_str(0,2),
@@ -194,6 +204,7 @@ module tb;
              env.goals_hit() - g0, env.goals_hit(), env.cov.tot,
              env.mon.cycle - cyc0, abt, ok ? "PASS" : "FAIL");
     // DUT-side (dbus) L1 and injected-delay cross-check
+    if (!rt_quiet)
     $display("DLAT,%s,dut_wrL1=%s,dut_rdL1=%s,inj_wr=%s,inj_rd=%s",
              c.name, dprobe.str(0,0), dprobe.str(1,0),
              inj_str(0, c.cfg_b), inj_str(1, c.cfg_r));
@@ -411,9 +422,17 @@ module tb;
     if (!$value$plusargs("PRIOR=%h", prior))   prior   = 64'h0;
     if (!$value$plusargs("TEST=%s",  tname))   tname   = "regress";
     if (!$value$plusargs("DUT=%s",   dutname)) dutname = "ram";
+    if (!$value$plusargs("MUTID=%d", mutid_arg))   mutid_arg   = 0;
+    if (!$value$plusargs("MUTSWEEP=%d", mutsweep)) mutsweep    = 0;
+    if (!$value$plusargs("MUTFIRST=%d", mut_first)) mut_first  = 1;
+    if (!$value$plusargs("MUTLAST=%d", mut_last))  mut_last    = 20;
+    if (!$value$plusargs("MUTFULL=%d", mut_full))  mut_full    = 0;
+    if (!$value$plusargs("MUTVAL=%d",  mut_val))   mut_val     = 1;
+    if (!$value$plusargs("MUTVERBOSE=%d", mut_verbose)) mut_verbose = 0;
 
     dut.leak = (isoleak != 0);
     if (maskm != 0) dutname = "ram_mut";   // masking test always uses the mutant
+    if (mutsweep != 0) dutname = "rtlmut"; // mutant sweep always uses the mutant library
 
     if (dutname == "gpio") begin
       depth = 8;
@@ -421,6 +440,13 @@ module tb;
       gmh = new(depth);
       gmh.ignore_strb = (mut == 1);
       rm = gmh;
+    end else if (dutname == "rtlmut") begin
+      depth = 16;
+      dut.sel   = 2'd3;
+      dut.mutid = mutid_arg;
+      rmh = new(depth);
+      rmh.ignore_strb = (mut == 1);
+      rm = rmh;
     end else if (dutname == "ram_mut") begin
       depth = 16;
       dut.sel = 2'd2;
@@ -447,6 +473,11 @@ module tb;
 
     $display("MANIFEST,dut=%s,test=%s,seed=%0d,mut=%0d,fault=%0d,neg=%0d,mask=%0d,injout=%0d,isoleak=%0d,n_ovr=%0d,prior=%h,lat_limit=%0d,wr_base=%0d,rd_base=%0d,depth=%0d",
              dutname, tname, seed, mut, fault, negm, maskm, injout, isoleak, n_ovr, prior, LAT_LIMIT, WR_BASE_L1, RD_BASE_L1, depth);
+
+    if (dutname == "rtlmut")
+      $display("MUTMANIFEST,dut=rtlmut,mutid=%0d,mutname=%s,sweep=%0d,first=%0d,last=%0d,full=%0d,val=%0d,verbose=%0d,clk_ns=%0d",
+               (mutsweep != 0) ? 0 : mutid_arg, mut_name((mutsweep != 0) ? 0 : mutid_arg),
+               mutsweep, mut_first, mut_last, mut_full, mut_val, mut_verbose, CLK_NS);
 
     viol_mon::set_ctx("startup");
     do_reset();
@@ -478,6 +509,9 @@ module tb;
       env.cov.neg_report();
       $display("NEGSUM dut=%s run=%0d detected=%0d missed=%0d %s",
                dutname, neg_run, neg_det, neg_mis, (neg_mis == 0) ? "PASS" : "FAIL");
+      $finish;
+    end else if (mutsweep != 0) begin
+      run_mutsweep();
       $finish;
     end else if (maskm != 0) begin
       mask_run = 0; mask_ok = 0;

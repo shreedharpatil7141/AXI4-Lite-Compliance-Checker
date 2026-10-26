@@ -28,7 +28,7 @@ class scoreboard2 extends scoreboard;
       if (o.unexpected) begin
         n_unexp++;
         void'(viol_mon::report(V_UNEXPECTED_RESP, (o.op == OP_WRITE) ? "B" : "R", o.t_rsp,
-              o.convert2string(), 1'b0));
+              o.convert2string(), 1'b0, "S01"));
       end else if (o.op == OP_WRITE) begin
         check_write(o);
       end else if (skip_rd > 0) begin
@@ -44,7 +44,7 @@ class scoreboard2 extends scoreboard;
     for (int k = 0; k < 2; k++)
       if (lcnt[k] > 0 && lmax[k][0] > lim)
         void'(viol_mon::report(V_RESP_TIMEOUT, (k == 0) ? "B" : "R", $time,
-              $sformatf("L1 max=%0d exceeds limit %0d", lmax[k][0], lim), 1'b0));
+              $sformatf("L1 max=%0d exceeds limit %0d", lmax[k][0], lim), 1'b0, "S02"));
   endfunction
 endclass
 

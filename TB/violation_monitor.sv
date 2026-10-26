@@ -17,6 +17,15 @@ typedef enum int {
 
 localparam int NUM_VCAT = 12;
 
+// Structured record of every counted violation (detector ID kept for diagnosis checks).
+typedef struct {
+  vcat_e cat;
+  string ch;       // as printed, including the "D:" prefix for DUT-facing reports
+  string det;      // detector ID: A01..A16 (assertions), S01..S10 (scoreboard/procedural)
+  time   t;
+  bit    from_chk;
+} vrec_t;
+
 class viol_mon;
   static int unsigned cnt [NUM_VCAT];
   static int unsigned cnt_dut [NUM_VCAT];   // subset reported by the DUT-facing checker (channel prefix "D:")
@@ -29,6 +38,8 @@ class viol_mon;
   static vcat_e       exp_cat    = V_VALID_WITHDRAWAL;
   static string       exp_ch     = "";
   static time         window     = 200;
+  static vrec_t       recs [$];          // counted reports, in report order
+  static bit          quiet      = 1'b0; // verification-only: suppress VIOL printing (mutant sweep)
 
   static bit          seen  [string];
   static int unsigned pa_n  [string];
@@ -77,6 +88,14 @@ class viol_mon;
     ctx = s;
   endfunction
 
+  static function int unsigned nrec();
+    return recs.size();
+  endfunction
+
+  static function void reset_dedup();
+    pa_n.delete(); pa_t.delete(); pp_n.delete(); pp_t.delete();
+  endfunction
+
   static function void clear_expect();
     exp_en = 1'b0;
   endfunction
@@ -99,9 +118,10 @@ class viol_mon;
     return s;
   endfunction
 
-  static function bit report(vcat_e c, string ch, time t, string msg, bit from_chk);
+  static function bit report(vcat_e c, string ch, time t, string msg, bit from_chk, string det = "");
     string k, k2, src;
     bit    is_exp;
+    vrec_t r;
     k  = $sformatf("%0d:%s:%0t", int'(c), ch, t);
     k2 = $sformatf("%0d:%s", int'(c), ch);
     if (seen.exists(k)) begin
@@ -133,9 +153,12 @@ class viol_mon;
     if (ch.len() >= 2 && ch.substr(0, 1) == "D:") cnt_dut[int'(c)]++;
     is_exp = exp_en && (c == exp_cat) && (exp_ch == "" || exp_ch == ch);
     if (is_exp) exp_hits++; else unexp_hits++;
-    $display("VIOL%s [%s/%s] t=%0t ch=%s src=%s ctx=%s %s",
-             is_exp ? "(expected)" : "", kind(c), cname(c), t, ch,
-             src, ctx, msg);
+    r.cat = c; r.ch = ch; r.det = det; r.t = t; r.from_chk = from_chk;
+    recs.push_back(r);
+    if (!quiet)
+      $display("VIOL%s [%s/%s] t=%0t ch=%s src=%s ctx=%s %s",
+               is_exp ? "(expected)" : "", kind(c), cname(c), t, ch,
+               src, ctx, msg);
     return 1'b1;
   endfunction
 
