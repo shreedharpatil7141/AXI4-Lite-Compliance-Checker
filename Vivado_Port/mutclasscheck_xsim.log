@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# xsim v2026.1 (64-bit)
+# SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+# IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+# SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+# Start of session at: Fri Nov  6 19:38:00 2026
+# Process ID         : 14448
+# Current directory  : C:/AXI4-Lite Compliance Checker
+# Command line       : xsim.exe -log Vivado_Port/mutclasscheck_xsim.log -mode tcl -source {xsim.dir/axi4l_sim/xsim_script.tcl}
+# Log file           : C:/AXI4-Lite Compliance Checker/Vivado_Port/mutclasscheck_xsim.log
+# Journal file       : C:/AXI4-Lite Compliance Checker\xsim.jou
+# Running On         : LAPTOP-GIAH5LJ2
+# Platform           : Windows 11
+# Operating System   : 26300
+# Processor Detail   : 13th Gen Intel(R) Core(TM) i5-13450HX
+# CPU Frequency      : 2611 MHz
+# CPU Physical cores : 10
+# CPU Logical cores  : 16
+# Host memory        : 25463 MB
+# Swap memory        : 3758 MB
+# Total Virtual      : 29221 MB
+# Available Virtual  : 7795 MB
+#-----------------------------------------------------------
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg MUTCLASSCHECK=1 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=1,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+MUTCLASSCASE,case=exact_primary,class=KILLED,expected_seen=1,primary_match=1,PASS
+MUTCLASSCASE,case=wrong_primary_expected_later,class=MISDIAGNOSED,expected_seen=1,primary_match=0,PASS
+MUTCLASSCASE,case=expected_absent,class=MISDIAGNOSED,expected_seen=0,primary_match=0,PASS
+MUTCLASSCASE,case=allowed_and_unexpected_secondary,class=NOISY,primary_match=1,secondary_records=2,unexp_records=1,unexp_ids=S04,PASS
+MUTCLASSCASE,case=co_primary_allowed,class=KILLED,primary_count=2,unallowed_primary_count=0,primary_match=1,PASS
+MUTCLASSCASE,case=missing_response_with_scoped_timeout,class=KILLED,primary_count=2,unallowed_primary_count=0,PASS
+MUTCLASSCASE,case=mut19_causal_a10,class=KILLED,unexp_secondary_records=0,PASS
+MUTCLASSCASE,case=mut19_unrelated_a10,class=NOISY,unexp_secondary_records=1,PASS
+MUTCLASSCASE,case=co_primary_unallowed,class=AMBIGUOUS,primary_count=2,unallowed_primary_count=1,PASS
+VIOL           [PROTOCOL/UNEXPECTED_RESPONSE] t=200000 ch=R src=CHK ctx=between_tests checker view
+VIOL           [PROTOCOL/UNEXPECTED_RESPONSE] t=200000 ch=R src=CHK ctx=between_tests after dedup reset
+MUTCLASSCASE,case=checker_procedural_duplicate,retained=2,duplicates=1,PASS
+MUTCLASSSUM,PASS
+$finish called at time : 45 ns : File "c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 849
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 19:38:02 2026...

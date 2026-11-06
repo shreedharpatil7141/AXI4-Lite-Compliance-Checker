@@ -1,0 +1,70 @@
+#-----------------------------------------------------------
+# xsim v2026.1 (64-bit)
+# SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+# IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+# SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+# Start of session at: Fri Nov  6 19:37:57 2026
+# Process ID         : 32044
+# Current directory  : C:/AXI4-Lite Compliance Checker
+# Command line       : xsim.exe -log Vivado_Port/negative_suite_xsim.log -mode tcl -source {xsim.dir/axi4l_sim/xsim_script.tcl}
+# Log file           : C:/AXI4-Lite Compliance Checker/Vivado_Port/negative_suite_xsim.log
+# Journal file       : C:/AXI4-Lite Compliance Checker\xsim.jou
+# Running On         : LAPTOP-GIAH5LJ2
+# Platform           : Windows 11
+# Operating System   : 26300
+# Processor Detail   : 13th Gen Intel(R) Core(TM) i5-13450HX
+# CPU Frequency      : 2611 MHz
+# CPU Physical cores : 10
+# CPU Logical cores  : 16
+# Host memory        : 25463 MB
+# Swap memory        : 3758 MB
+# Total Virtual      : 29221 MB
+# Available Virtual  : 7779 MB
+#-----------------------------------------------------------
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg NEG=100 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=1,mut=0,fault=0,neg=100,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+
+Time: 135 ns Started: 125 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+VIOL           [PROTOCOL/VALID_WITHDRAWAL] t=135000 ch=B src=CHK ctx=neg1,seed=1 A07 BVALID dropped before BREADY
+NEGRES,n_valid_withdraw_b,exp=VALID_WITHDRAWAL,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+
+Time: 365 ns Started: 355 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+VIOL           [PROTOCOL/VALID_WITHDRAWAL] t=365000 ch=R src=CHK ctx=neg2,seed=1 A09 RVALID dropped before RREADY
+NEGRES,n_valid_withdraw_r,exp=VALID_WITHDRAWAL,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+
+Time: 555 ns Started: 545 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:31
+VIOL           [PROTOCOL/PAYLOAD_INSTABILITY] t=555000 ch=AW src=CHK ctx=neg3,seed=1 A02 AWADDR changed while stalled
+NEGRES,n_payload_change,exp=PAYLOAD_INSTABILITY,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+
+Time: 755 ns Started: 745 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+VIOL           [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=755000 ch=B src=CHK ctx=neg4,seed=1 A08 BRESP changed while stalled
+
+Time: 765 ns Started: 755 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+VIOL           [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=765000 ch=B src=CHK ctx=neg4,seed=1 A08 BRESP changed while stalled
+NEGRES,n_resp_unstable_b,exp=RESP_PAYLOAD_INSTABILITY,hits=2,allowed_conseq=0,unexpected=0,DETECTED
+
+Time: 985 ns Started: 975 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+VIOL           [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=985000 ch=R src=CHK ctx=neg5,seed=1 A10 RDATA/RRESP changed while stalled
+
+Time: 995 ns Started: 985 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+VIOL           [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=995000 ch=R src=CHK ctx=neg5,seed=1 A10 RDATA/RRESP changed while stalled
+NEGRES,n_resp_unstable_r,exp=RESP_PAYLOAD_INSTABILITY,hits=2,allowed_conseq=0,unexpected=0,DETECTED
+DRV TIMEOUT t=3155000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=0 WR addr=00000010 data=f6f6f6f6 strb=1111 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+VIOL           [TIMEOUT/MISSING_RESPONSE] t=3215000 ch=REQ0 src=PROC ctx=neg6,seed=1 accepted request without response (wr_txn=1 rd_txn=0)
+VIOL           [TIMEOUT/RESPONSE_TIMEOUT] t=3215000 ch=DRV0 src=PROC ctx=neg6,seed=1 driver bounded wait expired
+NEGRES,n_missing_resp,exp=MISSING_RESPONSE,hits=1,allowed_conseq=1,unexpected=0,DETECTED
+VIOL           [TIMEOUT/RESPONSE_TIMEOUT] t=4865000 ch=B src=PROC ctx=neg7,seed=1 L1 max=152 exceeds limit 100
+NEGRES,n_resp_timeout,exp=RESPONSE_TIMEOUT,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+VIOL           [ACCOUNTING/ACCOUNTING_MISMATCH] t=5075000 ch=- src=PROC ctx=neg8,seed=1 monitor_completed=2 driver_completed=3
+NEGRES,n_accounting,exp=ACCOUNTING_MISMATCH,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+VIOL           [DATA/DATA_MISMATCH] t=5235000 ch=R src=PROC ctx=neg9,seed=1 addr=00000000 data exp=aabbccdd got=11bb33dd
+NEGRES,n_data_mismatch,exp=DATA_MISMATCH,hits=1,allowed_conseq=0,unexpected=0,DETECTED
+NEGCOV categories hit=7/12 native=58.33
+NEGGAP uncovered: UNEXPECTED_RESPONSE ILLEGAL_RESP_ENCODING RESET_RECOVERY X_UNKNOWN RESP_CODE_MISMATCH
+NEGSUM dut=ram run=9 detected=9 missed=0 PASS
+$finish called at time : 5295 ns : File "c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 901
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 19:37:59 2026...

@@ -1,0 +1,460 @@
+#-----------------------------------------------------------
+# xsim v2026.1 (64-bit)
+# SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+# IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+# SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+# Start of session at: Fri Nov  6 19:37:05 2026
+# Process ID         : 13544
+# Current directory  : C:/AXI4-Lite Compliance Checker
+# Command line       : xsim.exe -log Vivado_Port/mutsweep_xsim.log -mode tcl -source {xsim.dir/axi4l_sim/xsim_script.tcl}
+# Log file           : C:/AXI4-Lite Compliance Checker/Vivado_Port/mutsweep_xsim.log
+# Journal file       : C:/AXI4-Lite Compliance Checker\xsim.jou
+# Running On         : LAPTOP-GIAH5LJ2
+# Platform           : Windows 11
+# Operating System   : 26300
+# Processor Detail   : 13th Gen Intel(R) Core(TM) i5-13450HX
+# CPU Frequency      : 2611 MHz
+# CPU Physical cores : 10
+# CPU Logical cores  : 16
+# Host memory        : 25463 MB
+# Swap memory        : 3758 MB
+# Total Virtual      : 29221 MB
+# Available Virtual  : 7908 MB
+#-----------------------------------------------------------
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg MUTSWEEP=1 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=rtlmut,test=regress,seed=1,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+MUTMANIFEST,dut=rtlmut,mutid=0,mutname=control,sweep=1,first=1,last=20,full=0,val=1,verbose=0,clk_ns=10
+MUTRES,id=0,name=control,exp=-/-/VALID_WITHDRAWAL,got=none,detected=0,det_ok=0,ch_ok=0,cat_ok=0,sec=-,unexp_sec=0,unexp_ids=-,trig=0,pdiff=0,val_trig=0,val_pdiff=0,nrec=0,tests_to_detect=0,detected_in=none,lat_pin_cyc=na,lat_win_cyc=na,view=NA,class=CONTROL_OK,reason=-,expected_seen=0,primary_match=0,primary_diag=-,primary_count=0,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=na,lat_expected_win_cyc=na,expected_test=0,expected_in=none
+106625 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+106625 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+DRV TIMEOUT t=112315000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=1 ARESETN=1 | id=47 WR addr=00000018 data=f8d62e46 strb=1101 exp=0 | aw=5 w=8 ar=0 bp_b=1 bp_r=1 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=114665000 aw_ok=0 w_ok=0 AWV=0 AWR=0 WV=1 WR=0 BV=1 BR=0 ARESETN=1 | id=51 WR addr=0000002c data=b644c007 strb=1001 exp=0 | aw=0 w=1 ar=2 bp_b=5 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=116695000 aw_ok=0 w_ok=0 AWV=1 AWR=0 WV=1 WR=0 BV=1 BR=0 ARESETN=1 | id=52 WR addr=00000038 data=d5a06476 strb=0101 exp=0 | aw=0 w=0 ar=0 bp_b=1 bp_r=1 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=118895000 aw_ok=0 w_ok=0 AWV=1 AWR=0 WV=0 WR=0 BV=1 BR=0 ARESETN=1 | id=55 WR addr=0000003c data=b3b351d0 strb=0001 exp=0 | aw=2 w=1 ar=2 bp_b=0 bp_r=5 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=121505000 aw_ok=0 w_ok=0 AWV=1 AWR=0 WV=1 WR=0 BV=1 BR=0 ARESETN=1 | id=62 WR addr=00000018 data=8f34d0af strb=0010 exp=0 | aw=1 w=1 ar=2 bp_b=1 bp_r=1 | done=0 to=1 rsp=0 rdata=00000000
+121805 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+121805 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 121905 ns Started: 121895 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+
+Time: 121905 ns Started: 121895 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+MUTRES,id=1,name=bvalid_withdraw,exp=A07/B/VALID_WITHDRAWAL,got=A07/D:B/VALID_WITHDRAWAL,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=1,pdiff=1,val_trig=6,val_pdiff=6,nrec=2,tests_to_detect=1,detected_in=mut1_bvalid_withdraw,lat_pin_cyc=0,lat_win_cyc=5,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A07/B/VALID_WITHDRAWAL,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=5,expected_test=1,expected_in=mut1_bvalid_withdraw
+122055 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+122055 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+129465 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+129465 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 129605 ns Started: 129595 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129605 ns Started: 129595 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129735 ns Started: 129725 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129735 ns Started: 129725 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129865 ns Started: 129855 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129865 ns Started: 129855 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129935 ns Started: 129925 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 129935 ns Started: 129925 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130155 ns Started: 130145 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130155 ns Started: 130145 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130295 ns Started: 130285 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130295 ns Started: 130285 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130365 ns Started: 130355 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130365 ns Started: 130355 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130435 ns Started: 130425 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130435 ns Started: 130425 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130505 ns Started: 130495 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130505 ns Started: 130495 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130605 ns Started: 130595 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130605 ns Started: 130595 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130675 ns Started: 130665 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130675 ns Started: 130665 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130745 ns Started: 130735 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130745 ns Started: 130735 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130815 ns Started: 130805 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130815 ns Started: 130805 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130885 ns Started: 130875 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130885 ns Started: 130875 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130955 ns Started: 130945 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 130955 ns Started: 130945 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131025 ns Started: 131015 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131025 ns Started: 131015 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131095 ns Started: 131085 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131095 ns Started: 131085 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131165 ns Started: 131155 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131165 ns Started: 131155 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131205 ns Started: 131195 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131205 ns Started: 131195 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131245 ns Started: 131235 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131245 ns Started: 131235 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131315 ns Started: 131305 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+
+Time: 131315 ns Started: 131305 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+MUTRES,id=2,name=bresp_change_stall,exp=A08/B/RESP_PAYLOAD_INSTABILITY,got=S04/B/RESP_CODE_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=S04,unexp_sec=0,unexp_ids=-,trig=21,pdiff=28,val_trig=63,val_pdiff=88,nrec=63,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=9,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S04/B/RESP_CODE_MISMATCH+A08/B/RESP_PAYLOAD_INSTABILITY,primary_count=2,secondary_records=20,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=9,expected_test=1,expected_in=t_directed
+131485 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+131485 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+138895 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+138895 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 139065 ns Started: 139055 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139065 ns Started: 139055 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139195 ns Started: 139185 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139195 ns Started: 139185 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139325 ns Started: 139315 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139325 ns Started: 139315 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139445 ns Started: 139435 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139445 ns Started: 139435 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139655 ns Started: 139645 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139655 ns Started: 139645 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139755 ns Started: 139745 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139755 ns Started: 139745 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139825 ns Started: 139815 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139825 ns Started: 139815 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139895 ns Started: 139885 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139895 ns Started: 139885 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139965 ns Started: 139955 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139965 ns Started: 139955 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139995 ns Started: 139985 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 139995 ns Started: 139985 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140065 ns Started: 140055 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140065 ns Started: 140055 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140135 ns Started: 140125 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140135 ns Started: 140125 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140205 ns Started: 140195 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140205 ns Started: 140195 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140275 ns Started: 140265 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140275 ns Started: 140265 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140345 ns Started: 140335 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140345 ns Started: 140335 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140415 ns Started: 140405 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140415 ns Started: 140405 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140485 ns Started: 140475 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140485 ns Started: 140475 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140555 ns Started: 140545 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140555 ns Started: 140545 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140705 ns Started: 140695 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140705 ns Started: 140695 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140775 ns Started: 140765 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140775 ns Started: 140765 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140805 ns Started: 140795 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 140805 ns Started: 140795 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+MUTRES,id=3,name=rdata_change_stall,exp=A10/R/RESP_PAYLOAD_INSTABILITY,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=S06,unexp_sec=0,unexp_ids=-,trig=21,pdiff=31,val_trig=76,val_pdiff=152,nrec=63,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=12,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH+A10/R/RESP_PAYLOAD_INSTABILITY,primary_count=2,secondary_records=20,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=12,expected_test=1,expected_in=t_directed
+140915 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+140915 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+148325 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+148325 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 148495 ns Started: 148485 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148495 ns Started: 148485 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148625 ns Started: 148615 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148625 ns Started: 148615 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148755 ns Started: 148745 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148755 ns Started: 148745 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148875 ns Started: 148865 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 148875 ns Started: 148865 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149085 ns Started: 149075 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149085 ns Started: 149075 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149185 ns Started: 149175 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149185 ns Started: 149175 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149255 ns Started: 149245 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149255 ns Started: 149245 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149325 ns Started: 149315 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149325 ns Started: 149315 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149395 ns Started: 149385 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149395 ns Started: 149385 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149425 ns Started: 149415 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149425 ns Started: 149415 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149495 ns Started: 149485 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149495 ns Started: 149485 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149565 ns Started: 149555 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149565 ns Started: 149555 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149635 ns Started: 149625 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149635 ns Started: 149625 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149705 ns Started: 149695 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149705 ns Started: 149695 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149775 ns Started: 149765 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149775 ns Started: 149765 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149845 ns Started: 149835 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149845 ns Started: 149835 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149915 ns Started: 149905 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149915 ns Started: 149905 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149985 ns Started: 149975 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 149985 ns Started: 149975 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150135 ns Started: 150125 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150135 ns Started: 150125 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150205 ns Started: 150195 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150205 ns Started: 150195 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150235 ns Started: 150225 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+
+Time: 150235 ns Started: 150225 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+MUTRES,id=4,name=rresp_change_stall,exp=A10/R/RESP_PAYLOAD_INSTABILITY,got=S05/R/RESP_CODE_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=S05,unexp_sec=0,unexp_ids=-,trig=21,pdiff=31,val_trig=76,val_pdiff=152,nrec=63,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=12,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S05/R/RESP_CODE_MISMATCH+A10/R/RESP_PAYLOAD_INSTABILITY,primary_count=2,secondary_records=20,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=12,expected_test=1,expected_in=t_directed
+150345 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+150345 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+DRV TIMEOUT t=157265000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=60 RD addr=00000010 data=d07d87d2 strb=1001 exp=0 | aw=2 w=3 ar=3 bp_b=10 bp_r=1 | done=0 to=1 rsp=0 rdata=89abcdef
+DRV TIMEOUT t=159285000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=61 RD addr=00000018 data=2fd92c46 strb=1100 exp=0 | aw=3 w=5 ar=2 bp_b=5 bp_r=5 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=161425000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=63 RD addr=00000028 data=ee90754f strb=1110 exp=0 | aw=0 w=5 ar=2 bp_b=2 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=163455000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=64 RD addr=00000030 data=cdec199b strb=1001 exp=0 | aw=2 w=3 ar=1 bp_b=10 bp_r=1 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=165495000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=65 RD addr=0000002c data=ed47be21 strb=1110 exp=0 | aw=2 w=1 ar=2 bp_b=5 bp_r=2 | done=0 to=1 rsp=0 rdata=00000000
+165555 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+165555 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 166115 ns Started: 166105 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166115 ns Started: 166105 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166325 ns Started: 166315 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166325 ns Started: 166315 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+MUTRES,id=5,name=rvalid_withdraw,exp=A09/R/VALID_WITHDRAWAL,got=A09/D:R/VALID_WITHDRAWAL,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=2,pdiff=2,val_trig=14,val_pdiff=14,nrec=4,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=51,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A09/R/VALID_WITHDRAWAL,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=51,expected_test=1,expected_in=t_directed
+167575 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+167575 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+174985 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+174985 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=6,name=strobe_ignored,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=2,pdiff=12,val_trig=6,val_pdiff=56,nrec=6,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=119,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=119,expected_test=1,expected_in=t_directed
+177005 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+177005 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+184415 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+184415 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=7,name=strobe_lane_swap,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=2,pdiff=10,val_trig=6,val_pdiff=46,nrec=5,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=119,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=119,expected_test=1,expected_in=t_directed
+186435 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+186435 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+193845 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+193845 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=8,name=decode_off_by_one,exp=S04/B/RESP_CODE_MISMATCH,got=S04/B/RESP_CODE_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=S05,unexp_sec=0,unexp_ids=-,trig=2,pdiff=4,val_trig=6,val_pdiff=12,nrec=2,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=92,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S04/B/RESP_CODE_MISMATCH,primary_count=1,secondary_records=1,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=92,expected_test=1,expected_in=t_directed
+195865 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+195865 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+203275 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+203275 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=9,name=write_alias_w0_w15,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=3,pdiff=6,val_trig=3,val_pdiff=2,nrec=2,tests_to_detect=4,detected_in=t_rand,lat_pin_cyc=1,lat_win_cyc=426,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=426,expected_test=4,expected_in=t_rand
+217545 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+217545 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+224955 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+224955 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=10,name=oor_write_okay,exp=S04/B/RESP_CODE_MISMATCH,got=S04/B/RESP_CODE_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=2,pdiff=4,val_trig=6,val_pdiff=12,nrec=2,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=92,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S04/B/RESP_CODE_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=92,expected_test=1,expected_in=t_directed
+226975 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+226975 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+234385 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+234385 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=11,name=oor_read_okay,exp=S05/R/RESP_CODE_MISMATCH,got=S05/R/RESP_CODE_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=2,pdiff=4,val_trig=6,val_pdiff=12,nrec=2,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=95,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S05/R/RESP_CODE_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=95,expected_test=1,expected_in=t_directed
+236405 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+236405 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+243815 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+243815 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 243975 ns Started: 243965 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+
+Time: 243975 ns Started: 243965 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+MUTRES,id=12,name=dup_b_pulse,exp=A13/B/UNEXPECTED_RESPONSE,got=A13/D:B/UNEXPECTED_RESPONSE,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=A07,unexp_sec=0,unexp_ids=-,trig=1,pdiff=1,val_trig=6,val_pdiff=6,nrec=4,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=10,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A13/B/UNEXPECTED_RESPONSE,primary_count=1,secondary_records=2,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=10,expected_test=1,expected_in=t_directed
+245835 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+245835 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+DRV TIMEOUT t=248155000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=4 WR addr=00000008 data=cafef00d strb=1111 exp=0 | aw=0 w=6 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=251925000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=4 WR addr=00000040 data=00000001 strb=1111 exp=10 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=254315000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=4 WR addr=00000014 data=aabbccdd strb=0010 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=256955000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=4 WR addr=00000008 data=2468ace0 strb=1111 exp=0 | aw=0 w=0 ar=0 bp_b=3 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=259395000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=4 WR addr=00000008 data=cafef00d strb=1111 exp=0 | aw=0 w=6 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=263705000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=51 WR addr=0000002c data=b644c007 strb=1001 exp=0 | aw=0 w=1 ar=2 bp_b=5 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+264985 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+264985 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+DRV TIMEOUT t=267125000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=2 WR addr=00000008 data=cafef00d strb=1111 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+MUTRES,id=13,name=drop_b,exp=S09/REQ0/MISSING_RESPONSE,got=S09/REQ0/MISSING_RESPONSE,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=1,pdiff=204,val_trig=6,val_pdiff=1265,nrec=2,tests_to_detect=1,detected_in=mut13_drop_b,lat_pin_cyc=204,lat_win_cyc=215,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S09/REQ0/MISSING_RESPONSE+S10/DRV0/RESPONSE_TIMEOUT,primary_count=2,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=204,lat_expected_win_cyc=215,expected_test=1,expected_in=mut13_drop_b
+267235 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+267235 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+DRV TIMEOUT t=269595000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=5 RD addr=00000008 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=273375000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=5 RD addr=00000040 data=00000000 strb=0000 exp=10 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=275775000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=5 RD addr=00000014 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=278455000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=5 RD addr=00000008 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=3 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=280875000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=5 RD addr=00000008 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRV TIMEOUT t=284575000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=45 RD addr=0000000c data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+286495 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+286495 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+DRV TIMEOUT t=288615000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=1 | id=2 RD addr=00000008 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+MUTRES,id=14,name=drop_r,exp=S09/REQ0/MISSING_RESPONSE,got=S09/REQ0/MISSING_RESPONSE,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=1,pdiff=205,val_trig=6,val_pdiff=1291,nrec=2,tests_to_detect=1,detected_in=mut14_drop_r,lat_pin_cyc=205,lat_win_cyc=213,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S09/REQ0/MISSING_RESPONSE+S10/DRV0/RESPONSE_TIMEOUT,primary_count=2,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=205,lat_expected_win_cyc=213,expected_test=1,expected_in=mut14_drop_r
+288725 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+288725 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+296135 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+296135 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=15,name=rdata_bitflip_w3,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=1,pdiff=9,val_trig=3,val_pdiff=20,nrec=1,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=8,lat_win_cyc=57,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=8,lat_expected_win_cyc=57,expected_test=1,expected_in=t_directed
+298155 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+298155 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+305565 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+305565 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 410005 ns Started: 410005 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+
+Time: 410005 ns Started: 410005 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+
+Time: 410015 ns Started: 410015 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+
+Time: 410015 ns Started: 410015 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+
+Time: 410025 ns Started: 410025 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:51
+
+Time: 410025 ns Started: 410025 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:51
+MUTRES,id=16,name=reset_keeps_rvalid,exp=A12/RST/RESET_RECOVERY,got=A12/D:RST/RESET_RECOVERY,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=A14+A12b,unexp_sec=0,unexp_ids=-,trig=3,pdiff=8,val_trig=3,val_pdiff=8,nrec=8,tests_to_detect=14,detected_in=t_reset_live,lat_pin_cyc=0,lat_win_cyc=10439,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A12/RST/RESET_RECOVERY,primary_count=1,secondary_records=4,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=10439,expected_test=14,expected_in=t_reset_live
+412145 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+412145 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+AWPROBE,mutid=0,accepted_while_pending=0,S06_count=0,PASS
+AWPROBE,mutid=17,accepted_while_pending=1,S06_count=2,PASS
+420415 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+420415 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+AWPROBE,mutid=0,accepted_while_pending=0,S06_count=0,PASS
+AWPROBE,mutid=17,accepted_while_pending=1,S06_count=2,PASS
+MUTRES,id=17,name=second_aw_accepted,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=1,pdiff=11,val_trig=1,val_pdiff=11,nrec=2,tests_to_detect=1,detected_in=second_aw_probe,lat_pin_cyc=10,lat_win_cyc=17,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=10,lat_expected_win_cyc=17,expected_test=1,expected_in=second_aw_probe
+421375 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+421375 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+428785 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+428785 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 428915 ns Started: 428915 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:42
+
+Time: 428915 ns Started: 428915 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:42
+
+Time: 428925 ns Started: 428925 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:42
+
+Time: 428925 ns Started: 428925 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:42
+MUTRES,id=18,name=exokay_write,exp=A11/B/ILLEGAL_RESP_ENCODING,got=A11/D:B/ILLEGAL_RESP_ENCODING,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=S04,unexp_sec=0,unexp_ids=-,trig=1,pdiff=2,val_trig=6,val_pdiff=12,nrec=5,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=8,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A11/B/ILLEGAL_RESP_ENCODING,primary_count=1,secondary_records=1,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=8,expected_test=1,expected_in=t_directed
+430805 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+430805 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+438215 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+438215 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 438405 ns Started: 438395 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 438405 ns Started: 438395 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+MUTRES,id=19,name=spurious_rvalid,exp=A14/R/UNEXPECTED_RESPONSE,got=A14/D:R/UNEXPECTED_RESPONSE,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=A09,unexp_sec=0,unexp_ids=-,trig=1,pdiff=1,val_trig=6,val_pdiff=6,nrec=4,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=13,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A14/R/UNEXPECTED_RESPONSE,primary_count=1,secondary_records=2,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=13,expected_test=1,expected_in=t_directed
+440235 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+440235 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+447635 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+447635 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 447975 ns Started: 447965 ns Scope: /tb/dchk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+
+Time: 447975 ns Started: 447965 ns Scope: /tb/chk File: c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+MUTRES,id=20,name=early_b_before_w,exp=A13/B/UNEXPECTED_RESPONSE,got=A13/D:B/UNEXPECTED_RESPONSE,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=A07,unexp_sec=0,unexp_ids=-,trig=1,pdiff=1,val_trig=3,val_pdiff=3,nrec=4,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=28,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A13/B/UNEXPECTED_RESPONSE,primary_count=1,secondary_records=2,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=28,expected_test=1,expected_in=t_directed
+MUTSUM dut=rtlmut seed=1 range=1..20 mutants=20 control=  OK killed=20 noisy=0 misdiagnosed=0 missed=0 ambiguous=0 not_exercised=0 invalid=0 full=0 val=1 records=20 expected_seen=20 primary_match=20
+MUTRATE den=20 (classified outcomes; excludes not_exercised=0 invalid=0 and control) detection_rate=20/20=100.0% expected_diag_rate=20/20=100.0% primary_diag_rate=20/20=100.0% clean_kill_rate=20/20=100.0% ambiguous_rate=0/20=0.0% misdiag_rate=0/20=0.0% noise_rate=0/20=0.0%
+$finish called at time : 449605 ns : File "c:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 904
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 237.039 ; gain = 0.000
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 19:37:14 2026...

@@ -1,0 +1,21 @@
+# Vivado / XSim generated files
+Vivado_Port/xsim.dir/
+Vivado_Port/.Xil/
+Vivado_Port/*.jou
+Vivado_Port/*.pb
+Vivado_Port/*.wdb
+Vivado_Port/*.vcd
+Vivado_Port/*.covdb
+xsim.dir/
+xsim.covdb/
+*.wdb
+*.vcd
+*.jou
+*.pb
+*.backup.log
+*.backup.jou
+tmp_mpl/
+__pycache__/
+*.pyc
+Thumbs.db
+.DS_Store
