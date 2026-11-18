@@ -48,6 +48,8 @@ Vivado_Port/
 
 ## 2. Quick Start (Running Under Vivado XSim)
 
+Presentation guide: [EVALUATOR_DEMO.md](EVALUATOR_DEMO.md).
+
 ### Option A: Run Full Automated Regression
 Run the complete regression suite (14-test baseline on RAM, coverage closure, 14-test regression on GPIO, and 9 negative tests):
 
