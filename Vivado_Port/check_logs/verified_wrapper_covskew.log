@@ -1,0 +1,35 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:34:51 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg COVSKEW=1 -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=7,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+AWWSKEW_SAMPLE,case=0,requested_aw_delay=0,requested_w_delay=0,aw_handshake_cycle=11,w_handshake_cycle=11,measured_separation=0,class=same_cycle
+AWWSKEW_SAMPLE,case=1,requested_aw_delay=0,requested_w_delay=1,aw_handshake_cycle=15,w_handshake_cycle=16,measured_separation=1,class=aw_first_1
+AWWSKEW_SAMPLE,case=2,requested_aw_delay=0,requested_w_delay=3,aw_handshake_cycle=20,w_handshake_cycle=23,measured_separation=3,class=aw_first_2_3
+AWWSKEW_SAMPLE,case=3,requested_aw_delay=0,requested_w_delay=6,aw_handshake_cycle=27,w_handshake_cycle=33,measured_separation=6,class=aw_first_4_plus
+AWWSKEW_SAMPLE,case=4,requested_aw_delay=1,requested_w_delay=0,aw_handshake_cycle=38,w_handshake_cycle=37,measured_separation=1,class=w_first_1
+AWWSKEW_SAMPLE,case=5,requested_aw_delay=3,requested_w_delay=0,aw_handshake_cycle=45,w_handshake_cycle=42,measured_separation=3,class=w_first_2_3
+AWWSKEW_SAMPLE,case=6,requested_aw_delay=6,requested_w_delay=0,aw_handshake_cycle=55,w_handshake_cycle=49,measured_separation=6,class=w_first_4_plus
+COV_AWW_SKEW native=100.00 samples=7 bins_hit=7/7
+COV_AWW_SKEW_BIN name=same_cycle hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_1 hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_2_3 hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_4_plus hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_1 hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_2_3 hits=1 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_4_plus hits=1 status=      HIT
+COVSKEW_ORDER custom_goals_hit=3/3
+COVSKEW_RESULT,samples=7,custom_goals_defined=49,completed=7,timeouts=0,aborted=0,violations=0,PASS
+CAMPAIGN PASS
+$finish called at time : 580 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 932
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:34:53 2026...

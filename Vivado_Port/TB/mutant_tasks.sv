@@ -818,6 +818,8 @@
              pct(c_recorded, den), pct(c_expected_seen, den),
              pct(c_primary_match, den), pct(c_kill, den),
              pct(c_ambig, den), pct(c_mis, den), pct(c_noisy, den));
+    if (!ctrl_ok || n_run == 0 || c_kill != n_run)
+      $fatal(1, "Mutation campaign requires control OK and every mutant KILLED");
     viol_mon::quiet = 1'b0;
     rt_quiet        = 1'b0;
   endtask

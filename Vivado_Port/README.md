@@ -2,7 +2,7 @@
 
 This directory contains the verified AMD Vivado 2026.1 / XSim compatibility port of the **DUT-Agnostic AXI4-Lite Protocol Compliance Checker with Latency Injection and Mutation-Based Evaluation**.
 
-All source modifications are completely contained within this `Vivado_Port/` folder. The original golden source code in `Design/` and `TB/` remains untouched.
+Port fixes are contained in this folder. Pre-existing local edits in root sources are preserved.
 
 ---
 
@@ -104,7 +104,7 @@ scripts\run_regression_xsim.bat
 
 ---
 
-## 3. Verified Experimental Results in Vivado XSim 2026.1
+## 3. Historical results (not validation of the current patch)
 
 | Test Campaign | Command / Plusarg | Tests | Result | Measured Cycles | Coverage Hit |
 | :--- | :--- | :---: | :---: | :---: | :---: |
@@ -125,3 +125,15 @@ $$\text{Reduction} = \frac{10,653 - 6,336}{10,653} \times 100\% = 40.52\%$$
 2. **Explicit Clocking Arguments on SVA System Functions**: SVA properties calling `$stable` and `$past` now explicitly pass `@(posedge vif.ACLK)` to resolve `[XSIM 43-4463]`.
 3. **Synchronous Wait Handling in Environment**: Replaced class member task argument sensitivity `wait (checked >= target);` with synchronous edge polling `while (checked < target) @(posedge drv.vif.ACLK);` to resolve `[XSIM 43-4328]` and `[XSIM 43-3980]`.
 4. **4-State Power-On Robustness**: Hardened reset assertions A12 and A12b against uninitialized `1'bx` values at $t=0$ by using 4-state exact comparisons (`=== 1'b0` and `!== 1'b1`).
+
+Current patch commands and measured results: [VALIDATION_PATCH.md](VALIDATION_PATCH.md).
+
+Reset A12/A12b are not strictly semantically equivalent to the original checks:
+`VALID !== 1'b1` passes for X/Z as well as zero, whereas `!VALID` does not pass
+for unknown values. These checks have not been weakened further.
+
+`run_xsim.bat` requires a final `CAMPAIGN PASS` marker, even if XSim returns zero.
+Expected assertion diagnostics in negative/fault/mutation runs do not themselves fail
+the campaign. Mutation policy requires control OK and every selected mutant KILLED;
+individual regression failures are collected until final classification.
+`run_mutants_xsim.bat` runs all 20 mutants with MUTFULL=1 at seeds 7 and 1.

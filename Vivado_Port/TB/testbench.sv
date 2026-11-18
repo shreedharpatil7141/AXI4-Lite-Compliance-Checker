@@ -135,6 +135,31 @@ module tb;
     end
   end
 
+  // Runner owns reset; driver pauses dequeue but completion draining continues.
+  initial begin
+    wait (env != null);
+    forever begin
+      @(negedge ACLK);
+      if (env.drv.recovery_needed) begin
+        $display("RECOVERY timeout: reset, preserving queued transactions");
+        // Diagnose unanswered accepted requests before monitor reset flushes them.
+        env.scb.n_pend += env.mon.pend_wr() + env.mon.pend_rd();
+        for (int i = 0; i < env.mon.pend_wr() + env.mon.pend_rd(); i++)
+          void'(viol_mon::report(V_MISSING_RESP, $sformatf("REQ%0d", i), $time,
+                "accepted request unanswered at timeout recovery", 1'b0, "S09"));
+        // RAM retains memory across reset. Fully accepted writes update the
+        // reference even if the defective DUT never returned B. Partial writes
+        // and reads are cancelled by reset; completion counters stay untouched.
+        $display("RECOVERY pending_wr=%0d pending_rd=%0d incomplete_wr=%0d",
+                 env.mon.pend_wr(), env.mon.pend_rd(), env.mon.inc_wr());
+        for (int i = 0; i < env.mon.pend_wr(); i++)
+          void'(env.rmod.do_write(env.mon.aw_q[i], env.mon.w_d[i], env.mon.w_s[i]));
+        do_reset();
+        env.drv.recovery_needed = 0;
+      end
+    end
+  end
+
   // L1 check: fixed cfg -> min==max==base+cfg ; random (-1) -> base..base+10
   function automatic bit lat_chk(int k, int cfg, int base);
     if (env.scb.lcnt[k] == 0) return 1'b0;
@@ -195,7 +220,12 @@ module tb;
     live = 1'b0;
 
     gen = new(env.g2d, c.seed, depth);
-    if (c.dir[0]) gen.directed_basic();
+    if (c.dir[0]) begin
+      gen.wr(32'h3c, 32'h13579bdf, 4'hf, 0, 0, 0);
+      gen.wr(32'h00, 32'h2468ace0, 4'hf, 0, 0, 0);
+      gen.rd(32'h3c, 0, 0);
+      gen.directed_basic();
+    end
     if (c.dir[1]) gen.directed_boundary();
     if (c.dir[2]) gen.directed_strobe();
     if (c.dir[3]) gen.directed_raw_waw();
@@ -480,6 +510,7 @@ module tb;
              (viol_mon::cnt[int'(V_VALID_WITHDRAWAL)] - c0) - 1,
              ok ? "PASS" : "FAIL");
     viol_mon::clear_expect();
+    if (!ok) $fatal(1, "DEDUPTEST failed");
   endtask
 
   // Opt-in native coverage probe. The printed class is always derived from
@@ -760,6 +791,41 @@ module tb;
     if (n_pass != 3) $fatal(1, "RSTREQ reset-during-request check failed");
   endtask
 
+  task automatic run_recovery_check();
+    generator g;
+    int unsigned base, t0, c0, v0;
+    bit ok;
+    ok = 1;
+    for (int k = 0; k < 3; k++) begin
+      u_shim.cfg_aw = (k == 0) ? 10 : 0;
+      u_shim.cfg_w = (k == 1) ? 10 : 0;
+      u_shim.cfg_ar = (k == 2) ? 10 : 0;
+      u_shim.cfg_b = 0; u_shim.cfg_r = 0;
+      do_reset();
+      env.scb.clear_stats();
+      base = env.checked; t0 = env.drv.timeouts; c0 = env.drv.completed;
+      v0 = viol_mon::total();
+      env.drv.timeout_cycles = 4;
+      g = new(env.g2d, seed, depth);
+      if (k == 2) g.rd(32'h20, 0, 0);
+      else g.wr(32'h20, 32'habcdef01, 4'hf, 0, 0, 0);
+      env.wait_done(base + 1);
+      while (env.drv.recovery_needed) @(posedge ACLK);
+      env.drv.timeout_cycles = 200;
+      u_shim.cfg_aw = 0; u_shim.cfg_w = 0; u_shim.cfg_ar = 0;
+      do_reset();
+      g.wr(32'h20, 32'h12345678, 4'hf, 0, 0, 0);
+      g.rd(32'h20, 0, 0);
+      env.wait_done(base + 3);
+      repeat (5) @(posedge ACLK);
+      ok &= (env.drv.timeouts == t0 + 1 && env.drv.completed == c0 + 2 &&
+             env.mon.pend_wr() == 0 && env.mon.pend_rd() == 0 &&
+             env.mon.inc_wr() == 0 && env.scb.errors() == 0 && viol_mon::total() == v0);
+    end
+    $display("DRVRECSUM cases=3 %s", ok ? "PASS" : "FAIL");
+    if (!ok) $fatal(1, "Driver recovery check failed");
+  endtask
+
   // ======================= main =======================
   initial begin
     int unsigned lo, hi, det, mis;
@@ -846,15 +912,23 @@ module tb;
 
     if (mutclassm != 0) begin
       run_mut_class_check();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (reqstallcovm != 0) begin
       run_reqstall_cov();
+      $display("CAMPAIGN PASS");
+      $finish;
+    end else if ($test$plusargs("DRVREC")) begin
+      run_recovery_check();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (rstreqm != 0) begin
       run_rstreq_check();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (skewcovm != 0) begin
       run_aww_skew_cov();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (awprobem != 0) begin
       bit ctl_ok, mut_ok;
@@ -868,9 +942,11 @@ module tb;
         if (!ctl_ok || !mut_ok)
           $fatal(1, "AWPROBESUM failed: golden=%0d mutant17=%0d", ctl_ok, mut_ok);
       end
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (dedupm != 0) begin
       run_dedup_check();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (fault != 0) begin
       lo = (fault == 100) ? 1 : fault;
@@ -890,6 +966,8 @@ module tb;
       env.cov.neg_report();
       $display("FAULTSUM run=%0d detected=%0d missed=%0d %s",
                hi - lo + 1, det, mis, (mis == 0) ? "PASS" : "FAIL");
+      if (mis != 0) $fatal(1, "FAULTSUM failed");
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (negm != 0) begin
       lo = (negm == 100) ? 1 : negm;
@@ -898,9 +976,12 @@ module tb;
       env.cov.neg_report();
       $display("NEGSUM dut=%s run=%0d detected=%0d missed=%0d %s",
                dutname, neg_run, neg_det, neg_mis, (neg_mis == 0) ? "PASS" : "FAIL");
+      if (neg_mis != 0) $fatal(1, "NEGSUM failed");
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (mutsweep != 0) begin
       run_mutsweep();
+      $display("CAMPAIGN PASS");
       $finish;
     end else if (maskm != 0) begin
       mask_run = 0; mask_ok = 0;
@@ -908,6 +989,8 @@ module tb;
       run_mask(5);
       viol_mon::summary();
       $display("MASKSUM runs=%0d ok=%0d %s", mask_run, mask_ok, (mask_ok == mask_run) ? "PASS" : "FAIL");
+      if (mask_ok != mask_run) $fatal(1, "MASKSUM failed");
+      $display("CAMPAIGN PASS");
       $finish;
     end else begin
       $display("HDR,test,seed,gen,accepted,completed,wrL1_min/avg/max,wrL3_min/avg/max,rdL1_min/avg/max,rdL3_min/avg/max,timeouts,mismatch,viol,goals_new,goals_cum,cycles,abort,status");
@@ -918,8 +1001,7 @@ module tb;
       end else begin
         c = lib.find(tname);
         if (c == null) begin
-          $display("STAGE9 ERROR unknown test %s", tname);
-          $finish;
+          $fatal(1, "STAGE9 ERROR unknown test %s", tname);
         end
         run_test(c);
       end
@@ -951,14 +1033,18 @@ module tb;
                tname, dutname, seed, mut, env.mon.cycle,
                (tests_fail == 0 && viol_mon::unexp_hits == 0 && dut.iso_viol_events == 0 &&
                 !iso_metric_check_failed) ? "PASS" : "FAIL");
+      if (tests_fail != 0 || viol_mon::unexp_hits != 0 || dut.iso_viol_events != 0 || iso_metric_check_failed)
+        $fatal(1, "Final regression verdict failed");
+      $display("CAMPAIGN PASS");
       $finish;
     end
   end
 
   initial begin
-    #30000000;
-    $display("STAGE9 WATCHDOG FAIL checked=%0d", env.checked);
-    $finish;
+    int unsigned watchdog_ns;
+    if (!$value$plusargs("WATCHDOG_NS=%d", watchdog_ns)) watchdog_ns = 30000000;
+    #(watchdog_ns);
+    $fatal(1, "STAGE9 WATCHDOG FAIL checked=%0d", env.checked);
   end
 
   initial begin

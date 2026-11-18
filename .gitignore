@@ -19,3 +19,19 @@ __pycache__/
 *.pyc
 Thumbs.db
 .DS_Store
+
+# Simulator transcripts outside the curated verification evidence directory
+/xelab.log
+/xsim.log
+/xvlog.log
+/Vivado_Port/*.log
+# Preserve local/intermediate runs, but exclude them from the intended patch.
+/Vivado_Port/check_logs/*
+!/Vivado_Port/check_logs/verified_*.log
+!/Vivado_Port/check_logs/verified_*.csv
+!/Vivado_Port/check_logs/mutant5.log
+!/Vivado_Port/check_logs/summary_missing_fixture.log
+!/Vivado_Port/check_logs/summary_valid_fixture.log
+!/Vivado_Port/check_logs/verdict_missing_fixture.log
+!/Vivado_Port/check_logs/finalization_*.log
+!/Vivado_Port/check_logs/finalization_*.csv

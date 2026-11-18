@@ -1,0 +1,101 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:46:54 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg FAULT=100 -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=7,mut=0,fault=100,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+
+Time: 135 ns Started: 125 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:20
+VIOL(expected) [PROTOCOL/VALID_WITHDRAWAL] t=135000 ch=AW src=CHK ctx=fault1 A01 AWVALID dropped before AWREADY
+FAULT 1 exp=VALID_WITHDRAWAL/AW hits=1 unexpected=0 DETECTED
+
+Time: 285 ns Started: 275 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:31
+VIOL(expected) [PROTOCOL/PAYLOAD_INSTABILITY] t=285000 ch=AW src=CHK ctx=fault2 A02 AWADDR changed while stalled
+FAULT 2 exp=PAYLOAD_INSTABILITY/AW hits=1 unexpected=0 DETECTED
+
+Time: 435 ns Started: 425 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:22
+VIOL(expected) [PROTOCOL/VALID_WITHDRAWAL] t=435000 ch=W src=CHK ctx=fault3 A03 WVALID dropped before WREADY
+FAULT 3 exp=VALID_WITHDRAWAL/W hits=1 unexpected=0 DETECTED
+
+Time: 585 ns Started: 575 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:33
+VIOL(expected) [PROTOCOL/PAYLOAD_INSTABILITY] t=585000 ch=W src=CHK ctx=fault4 A04 WDATA/WSTRB changed while stalled
+FAULT 4 exp=PAYLOAD_INSTABILITY/W hits=1 unexpected=0 DETECTED
+
+Time: 735 ns Started: 725 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:24
+VIOL(expected) [PROTOCOL/VALID_WITHDRAWAL] t=735000 ch=AR src=CHK ctx=fault5 A05 ARVALID dropped before ARREADY
+FAULT 5 exp=VALID_WITHDRAWAL/AR hits=1 unexpected=0 DETECTED
+
+Time: 885 ns Started: 875 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:35
+VIOL(expected) [PROTOCOL/PAYLOAD_INSTABILITY] t=885000 ch=AR src=CHK ctx=fault6 A06 ARADDR changed while stalled
+FAULT 6 exp=PAYLOAD_INSTABILITY/AR hits=1 unexpected=0 DETECTED
+
+Time: 1055 ns Started: 1045 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:26
+VIOL(expected) [PROTOCOL/VALID_WITHDRAWAL] t=1055000 ch=B src=CHK ctx=fault7 A07 BVALID dropped before BREADY
+FAULT 7 exp=VALID_WITHDRAWAL/B hits=1 unexpected=0 DETECTED
+
+Time: 1235 ns Started: 1225 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:37
+VIOL(expected) [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=1235000 ch=B src=CHK ctx=fault8 A08 BRESP changed while stalled
+FAULT 8 exp=RESP_PAYLOAD_INSTABILITY/B hits=1 unexpected=0 DETECTED
+
+Time: 1415 ns Started: 1405 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+VIOL(expected) [PROTOCOL/VALID_WITHDRAWAL] t=1415000 ch=R src=CHK ctx=fault9 A09 RVALID dropped before RREADY
+FAULT 9 exp=VALID_WITHDRAWAL/R hits=1 unexpected=0 DETECTED
+
+Time: 1595 ns Started: 1585 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:39
+VIOL(expected) [PROTOCOL/RESP_PAYLOAD_INSTABILITY] t=1595000 ch=R src=CHK ctx=fault10 A10 RDATA/RRESP changed while stalled
+FAULT 10 exp=RESP_PAYLOAD_INSTABILITY/R hits=1 unexpected=0 DETECTED
+
+Time: 1765 ns Started: 1765 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:42
+VIOL(expected) [PROTOCOL/ILLEGAL_RESP_ENCODING] t=1765000 ch=B src=CHK ctx=fault11 A11 BRESP is EXOKAY
+FAULT 11 exp=ILLEGAL_RESP_ENCODING/B hits=1 unexpected=0 DETECTED
+
+Time: 1925 ns Started: 1925 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:44
+VIOL(expected) [PROTOCOL/ILLEGAL_RESP_ENCODING] t=1925000 ch=R src=CHK ctx=fault12 A11 RRESP is EXOKAY
+FAULT 12 exp=ILLEGAL_RESP_ENCODING/R hits=1 unexpected=0 DETECTED
+VIOL(expected) [PROTOCOL/UNEXPECTED_RESPONSE] t=2065000 ch=B src=CHK ctx=fault13 A13 BVALID without accepted AW and W
+FAULT 13 exp=UNEXPECTED_RESPONSE/B hits=1 unexpected=0 DETECTED
+VIOL(expected) [PROTOCOL/UNEXPECTED_RESPONSE] t=2205000 ch=R src=CHK ctx=fault14 A14 RVALID without accepted AR
+FAULT 14 exp=UNEXPECTED_RESPONSE/R hits=1 unexpected=0 DETECTED
+
+Time: 2345 ns Started: 2345 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:56
+VIOL(expected) [PROTOCOL/X_UNKNOWN] t=2345000 ch=CTRL src=CHK ctx=fault15 A15 X/Z on control signal
+FAULT 15 exp=X_UNKNOWN/CTRL hits=1 unexpected=0 DETECTED
+
+Time: 2485 ns Started: 2485 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2485000 ch=RST src=CHK ctx=fault16 A12 VALID high during reset
+
+Time: 2495 ns Started: 2495 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2495000 ch=RST src=CHK ctx=fault16 A12 VALID high during reset
+
+Time: 2505 ns Started: 2505 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2505000 ch=RST src=CHK ctx=fault16 A12 VALID high during reset
+
+Time: 2515 ns Started: 2515 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2515000 ch=RST src=CHK ctx=fault16 A12 VALID high during reset
+
+Time: 2525 ns Started: 2525 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:47
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2525000 ch=RST src=CHK ctx=fault16 A12 VALID high during reset
+FAULT 16 exp=RESET_RECOVERY/RST hits=5 unexpected=0 DETECTED
+
+Time: 2655 ns Started: 2655 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:51
+VIOL(expected) [PROTOCOL/RESET_RECOVERY] t=2655000 ch=RST src=CHK ctx=fault17 A12b VALID high on first cycle after reset
+FAULT 17 exp=RESET_RECOVERY/RST hits=1 unexpected=0 DETECTED
+
+Time: 2785 ns Started: 2785 ns Scope: /tb/fchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:60
+VIOL(expected) [PROTOCOL/X_UNKNOWN] t=2785000 ch=AW src=CHK ctx=fault18 A16 X on AWADDR while AWVALID
+FAULT 18 exp=X_UNKNOWN/AW hits=1 unexpected=0 DETECTED
+NEGCOV categories hit=7/12 native=58.33
+NEGGAP uncovered: MISSING_RESPONSE RESPONSE_TIMEOUT ACCOUNTING_MISMATCH DATA_MISMATCH RESP_CODE_MISMATCH
+FAULTSUM run=18 detected=18 missed=0 PASS
+CAMPAIGN PASS
+$finish called at time : 2835 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 971
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:46:56 2026...

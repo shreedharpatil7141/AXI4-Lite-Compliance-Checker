@@ -1,0 +1,3 @@
+PASS: 30 saved campaigns, command seeds/log paths, source hashes, cycles, 30 summary rechecks
+Only source-manifest difference: reviewed runner dispatch fix; HDL hashes all match.
+Cycles: {'ram_s7': 10779, 'gpio_s7': 10747, 'closure_s7': 6385, 'ram_s1': 10757, 'gpio_s1': 10717, 'closure_s1': 6382}

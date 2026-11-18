@@ -1,0 +1,8 @@
+case,exit,command
+disabled,0,"call scripts\run_xsim.bat ""-testplusarg"" ""NEG=0"" ""-testplusarg"" ""FAULT=0"" ""-testplusarg"" ""MASK=0"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_disabled.log 2>&1"
+negative,0,"call scripts\run_xsim.bat ""-testplusarg"" ""NEG=100"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_negative.log 2>&1"
+precedence,0,"call scripts\run_xsim.bat ""-testplusarg"" ""MUTCLASSCHECK=1"" ""-testplusarg"" ""NEG=100"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_precedence.log 2>&1"
+watchdog,1,"call scripts\run_xsim.bat ""-testplusarg"" ""WATCHDOG_NS=1"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_watchdog.log 2>&1"
+mutant,0,"call scripts\run_xsim.bat ""-testplusarg"" ""MUTSWEEP=1"" ""-testplusarg"" ""MUTFIRST=5"" ""-testplusarg"" ""MUTLAST=5"" ""-testplusarg"" ""MUTFULL=1"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_mutant.log 2>&1"
+fault,0,"call scripts\run_xsim.bat ""-testplusarg"" ""FAULT=100"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_fault.log 2>&1"
+invalid,1,"call scripts\run_xsim.bat ""-testplusarg"" ""TEST=does_not_exist"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_invalid.log 2>&1"

@@ -1,0 +1,1455 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:46:48 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg MUTSWEEP=1 -testplusarg MUTFIRST=5 -testplusarg MUTLAST=5 -testplusarg MUTFULL=1 -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=rtlmut,test=regress,seed=7,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+MUTMANIFEST,dut=rtlmut,mutid=0,mutname=control,sweep=1,first=5,last=5,full=1,val=1,verbose=0,clk_ns=10
+MUTRES,id=0,name=control,exp=-/-/VALID_WITHDRAWAL,got=none,detected=0,det_ok=0,ch_ok=0,cat_ok=0,sec=-,unexp_sec=0,unexp_ids=-,trig=0,pdiff=0,val_trig=0,val_pdiff=0,nrec=0,tests_to_detect=0,detected_in=none,lat_pin_cyc=na,lat_win_cyc=na,view=NA,class=CONTROL_OK,reason=-,expected_seen=0,primary_match=0,primary_diag=-,primary_count=0,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=na,lat_expected_win_cyc=na,expected_test=0,expected_in=none
+107885 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+107885 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+115315 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+115315 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+
+Time: 115985 ns Started: 115975 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 115985 ns Started: 115975 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 116195 ns Started: 116185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 116195 ns Started: 116185 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 118835 ns Started: 118825 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 118835 ns Started: 118825 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 118955 ns Started: 118945 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 118955 ns Started: 118945 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119095 ns Started: 119085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119095 ns Started: 119085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119255 ns Started: 119245 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119255 ns Started: 119245 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119915 ns Started: 119905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 119915 ns Started: 119905 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 120895 ns Started: 120885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 120895 ns Started: 120885 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 121505 ns Started: 121495 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 121505 ns Started: 121495 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 122455 ns Started: 122445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 122455 ns Started: 122445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 122975 ns Started: 122965 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 122975 ns Started: 122965 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 123275 ns Started: 123265 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 123275 ns Started: 123265 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124275 ns Started: 124265 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124275 ns Started: 124265 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124485 ns Started: 124475 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124485 ns Started: 124475 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124685 ns Started: 124675 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 124685 ns Started: 124675 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125185 ns Started: 125175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125185 ns Started: 125175 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125335 ns Started: 125325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125335 ns Started: 125325 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125465 ns Started: 125455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125465 ns Started: 125455 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125775 ns Started: 125765 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 125775 ns Started: 125765 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126015 ns Started: 126005 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126015 ns Started: 126005 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126105 ns Started: 126095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126105 ns Started: 126095 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126225 ns Started: 126215 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126225 ns Started: 126215 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126365 ns Started: 126355 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126365 ns Started: 126355 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126435 ns Started: 126425 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126435 ns Started: 126425 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126715 ns Started: 126705 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126715 ns Started: 126705 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126805 ns Started: 126795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126805 ns Started: 126795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126905 ns Started: 126895 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 126905 ns Started: 126895 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127115 ns Started: 127105 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127115 ns Started: 127105 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127195 ns Started: 127185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127195 ns Started: 127185 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127255 ns Started: 127245 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127255 ns Started: 127245 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127465 ns Started: 127455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127465 ns Started: 127455 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127535 ns Started: 127525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127535 ns Started: 127525 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127695 ns Started: 127685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127695 ns Started: 127685 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127885 ns Started: 127875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 127885 ns Started: 127875 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128035 ns Started: 128025 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128035 ns Started: 128025 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128345 ns Started: 128335 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128345 ns Started: 128335 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128405 ns Started: 128395 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128405 ns Started: 128395 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128765 ns Started: 128755 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 128765 ns Started: 128755 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129185 ns Started: 129175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129185 ns Started: 129175 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129595 ns Started: 129585 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129595 ns Started: 129585 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129725 ns Started: 129715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129725 ns Started: 129715 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129945 ns Started: 129935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 129945 ns Started: 129935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 130665 ns Started: 130655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 130665 ns Started: 130655 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 130875 ns Started: 130865 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 130875 ns Started: 130865 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132335 ns Started: 132325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132335 ns Started: 132325 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132835 ns Started: 132825 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132835 ns Started: 132825 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132985 ns Started: 132975 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 132985 ns Started: 132975 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133115 ns Started: 133105 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133115 ns Started: 133105 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133425 ns Started: 133415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133425 ns Started: 133415 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133665 ns Started: 133655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133665 ns Started: 133655 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133755 ns Started: 133745 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133755 ns Started: 133745 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133875 ns Started: 133865 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 133875 ns Started: 133865 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134015 ns Started: 134005 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134015 ns Started: 134005 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134085 ns Started: 134075 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134085 ns Started: 134075 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134365 ns Started: 134355 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134365 ns Started: 134355 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134455 ns Started: 134445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134455 ns Started: 134445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134555 ns Started: 134545 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134555 ns Started: 134545 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134765 ns Started: 134755 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134765 ns Started: 134755 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134845 ns Started: 134835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134845 ns Started: 134835 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134905 ns Started: 134895 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 134905 ns Started: 134895 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135115 ns Started: 135105 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135115 ns Started: 135105 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135185 ns Started: 135175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135185 ns Started: 135175 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135345 ns Started: 135335 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135345 ns Started: 135335 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135535 ns Started: 135525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135535 ns Started: 135525 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135685 ns Started: 135675 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 135685 ns Started: 135675 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136175 ns Started: 136165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136175 ns Started: 136165 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136275 ns Started: 136265 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136275 ns Started: 136265 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136435 ns Started: 136425 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136435 ns Started: 136425 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136595 ns Started: 136585 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136595 ns Started: 136585 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136745 ns Started: 136735 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136745 ns Started: 136735 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136975 ns Started: 136965 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 136975 ns Started: 136965 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137095 ns Started: 137085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137095 ns Started: 137085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137195 ns Started: 137185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137195 ns Started: 137185 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137295 ns Started: 137285 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137295 ns Started: 137285 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137395 ns Started: 137385 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137395 ns Started: 137385 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137445 ns Started: 137435 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137445 ns Started: 137435 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137545 ns Started: 137535 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137545 ns Started: 137535 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137645 ns Started: 137635 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137645 ns Started: 137635 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137745 ns Started: 137735 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137745 ns Started: 137735 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137845 ns Started: 137835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137845 ns Started: 137835 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137945 ns Started: 137935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 137945 ns Started: 137935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138045 ns Started: 138035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138045 ns Started: 138035 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138145 ns Started: 138135 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138145 ns Started: 138135 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138245 ns Started: 138235 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138245 ns Started: 138235 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138445 ns Started: 138435 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138445 ns Started: 138435 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138545 ns Started: 138535 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138545 ns Started: 138535 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138595 ns Started: 138585 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138595 ns Started: 138585 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138875 ns Started: 138865 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 138875 ns Started: 138865 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139415 ns Started: 139405 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139415 ns Started: 139405 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139575 ns Started: 139565 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139575 ns Started: 139565 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139715 ns Started: 139705 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 139715 ns Started: 139705 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140015 ns Started: 140005 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140015 ns Started: 140005 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140075 ns Started: 140065 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140075 ns Started: 140065 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140275 ns Started: 140265 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140275 ns Started: 140265 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140355 ns Started: 140345 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140355 ns Started: 140345 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140455 ns Started: 140445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140455 ns Started: 140445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140585 ns Started: 140575 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140585 ns Started: 140575 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140735 ns Started: 140725 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140735 ns Started: 140725 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140805 ns Started: 140795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 140805 ns Started: 140795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141045 ns Started: 141035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141045 ns Started: 141035 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141125 ns Started: 141115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141125 ns Started: 141115 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141215 ns Started: 141205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141215 ns Started: 141205 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141325 ns Started: 141315 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141325 ns Started: 141315 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141555 ns Started: 141545 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141555 ns Started: 141545 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141645 ns Started: 141635 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141645 ns Started: 141635 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141705 ns Started: 141695 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141705 ns Started: 141695 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141855 ns Started: 141845 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141855 ns Started: 141845 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141945 ns Started: 141935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 141945 ns Started: 141935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142025 ns Started: 142015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142025 ns Started: 142015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142095 ns Started: 142085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142095 ns Started: 142085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142165 ns Started: 142155 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142165 ns Started: 142155 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142235 ns Started: 142225 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142235 ns Started: 142225 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142445 ns Started: 142435 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142445 ns Started: 142435 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142605 ns Started: 142595 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142605 ns Started: 142595 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142935 ns Started: 142925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 142935 ns Started: 142925 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 143215 ns Started: 143205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 143335 ns Started: 143325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 143515 ns Started: 143505 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 143695 ns Started: 143685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 143865 ns Started: 143855 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144125 ns Started: 144115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144275 ns Started: 144265 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144395 ns Started: 144385 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144515 ns Started: 144505 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144635 ns Started: 144625 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144695 ns Started: 144685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144815 ns Started: 144805 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 144935 ns Started: 144925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145055 ns Started: 145045 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145175 ns Started: 145165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145295 ns Started: 145285 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145415 ns Started: 145405 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145535 ns Started: 145525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145655 ns Started: 145645 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 145895 ns Started: 145885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 146015 ns Started: 146005 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 146075 ns Started: 146065 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 146155 ns Started: 146145 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 146665 ns Started: 146655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 146845 ns Started: 146835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147005 ns Started: 146995 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147345 ns Started: 147335 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147415 ns Started: 147405 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147645 ns Started: 147635 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147735 ns Started: 147725 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 147855 ns Started: 147845 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148005 ns Started: 147995 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148175 ns Started: 148165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148265 ns Started: 148255 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148535 ns Started: 148525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148625 ns Started: 148615 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148735 ns Started: 148725 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 148865 ns Started: 148855 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149125 ns Started: 149115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149235 ns Started: 149225 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149315 ns Started: 149305 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149495 ns Started: 149485 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149595 ns Started: 149585 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149695 ns Started: 149685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149785 ns Started: 149775 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149865 ns Started: 149855 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 149945 ns Started: 149935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 150185 ns Started: 150175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 150365 ns Started: 150355 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 150725 ns Started: 150715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 150805 ns Started: 150795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 151255 ns Started: 151245 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 151435 ns Started: 151425 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 151675 ns Started: 151665 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 151915 ns Started: 151905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 152145 ns Started: 152135 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 152465 ns Started: 152455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 152675 ns Started: 152665 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 152855 ns Started: 152845 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153035 ns Started: 153025 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153215 ns Started: 153205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153305 ns Started: 153295 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153485 ns Started: 153475 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153665 ns Started: 153655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 153845 ns Started: 153835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 154025 ns Started: 154015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 154205 ns Started: 154195 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 154385 ns Started: 154375 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 154565 ns Started: 154555 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 154745 ns Started: 154735 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 155105 ns Started: 155095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 155285 ns Started: 155275 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 155375 ns Started: 155365 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 155985 ns Started: 155975 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 156195 ns Started: 156185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 156385 ns Started: 156375 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 156815 ns Started: 156805 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 156915 ns Started: 156905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157205 ns Started: 157195 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157325 ns Started: 157315 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157475 ns Started: 157465 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157655 ns Started: 157645 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157855 ns Started: 157845 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 157975 ns Started: 157965 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 158305 ns Started: 158295 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 158425 ns Started: 158415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 158565 ns Started: 158555 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 158725 ns Started: 158715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159045 ns Started: 159035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159185 ns Started: 159175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159295 ns Started: 159285 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159535 ns Started: 159525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159665 ns Started: 159655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159795 ns Started: 159785 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 159915 ns Started: 159905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 160025 ns Started: 160015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 160135 ns Started: 160125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 160435 ns Started: 160425 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 160645 ns Started: 160635 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 161065 ns Started: 161055 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 161175 ns Started: 161165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 161925 ns Started: 161915 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 162205 ns Started: 162195 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 162545 ns Started: 162535 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 162885 ns Started: 162875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 163215 ns Started: 163205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 163635 ns Started: 163625 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 163945 ns Started: 163935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 164225 ns Started: 164215 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 164505 ns Started: 164495 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 164785 ns Started: 164775 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 164925 ns Started: 164915 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 165205 ns Started: 165195 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 165485 ns Started: 165475 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 165765 ns Started: 165755 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166045 ns Started: 166035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166325 ns Started: 166315 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166605 ns Started: 166595 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 166885 ns Started: 166875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 167165 ns Started: 167155 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 167725 ns Started: 167715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 168005 ns Started: 167995 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 168145 ns Started: 168135 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 168695 ns Started: 168685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 168955 ns Started: 168945 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 169195 ns Started: 169185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 169775 ns Started: 169765 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 169925 ns Started: 169915 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 170315 ns Started: 170305 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 170485 ns Started: 170475 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 170685 ns Started: 170675 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 170915 ns Started: 170905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 171165 ns Started: 171155 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 171335 ns Started: 171325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 171765 ns Started: 171755 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 171935 ns Started: 171925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 172125 ns Started: 172115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 172335 ns Started: 172325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 172755 ns Started: 172745 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 172945 ns Started: 172935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 173105 ns Started: 173095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 173445 ns Started: 173435 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 173625 ns Started: 173615 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 173805 ns Started: 173795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 173975 ns Started: 173965 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 174135 ns Started: 174125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 174295 ns Started: 174285 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 174695 ns Started: 174685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 174955 ns Started: 174945 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 175475 ns Started: 175465 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 175635 ns Started: 175625 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 176485 ns Started: 176475 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 176715 ns Started: 176705 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177095 ns Started: 177085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177095 ns Started: 177085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177255 ns Started: 177245 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177535 ns Started: 177525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177535 ns Started: 177525 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177655 ns Started: 177645 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177655 ns Started: 177645 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 177885 ns Started: 177875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 178025 ns Started: 178015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 178025 ns Started: 178015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 178215 ns Started: 178205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 178405 ns Started: 178395 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 178885 ns Started: 178875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 179005 ns Started: 178995 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 179215 ns Started: 179205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 179465 ns Started: 179455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 179615 ns Started: 179605 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 179755 ns Started: 179745 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180085 ns Started: 180075 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180265 ns Started: 180255 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180265 ns Started: 180255 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180395 ns Started: 180385 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180805 ns Started: 180795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 180805 ns Started: 180795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181045 ns Started: 181035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181135 ns Started: 181125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181135 ns Started: 181125 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181235 ns Started: 181225 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181235 ns Started: 181225 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181365 ns Started: 181355 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181365 ns Started: 181355 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181515 ns Started: 181505 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181515 ns Started: 181505 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181585 ns Started: 181575 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181945 ns Started: 181935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 181945 ns Started: 181935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182035 ns Started: 182025 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182195 ns Started: 182185 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182195 ns Started: 182185 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182455 ns Started: 182445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182455 ns Started: 182445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182545 ns Started: 182535 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182545 ns Started: 182535 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182605 ns Started: 182595 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182605 ns Started: 182595 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182745 ns Started: 182735 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182745 ns Started: 182735 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182835 ns Started: 182825 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 182935 ns Started: 182925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183105 ns Started: 183095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183215 ns Started: 183205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183375 ns Started: 183365 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183375 ns Started: 183365 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183615 ns Started: 183605 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 183825 ns Started: 183815 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184345 ns Started: 184335 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184345 ns Started: 184335 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184405 ns Started: 184395 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184405 ns Started: 184395 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184835 ns Started: 184825 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 184835 ns Started: 184825 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 185945 ns Started: 185935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 185945 ns Started: 185935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 186225 ns Started: 186215 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 186225 ns Started: 186215 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188565 ns Started: 188555 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188565 ns Started: 188555 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188715 ns Started: 188705 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188715 ns Started: 188705 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188865 ns Started: 188855 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 188865 ns Started: 188855 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189315 ns Started: 189305 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189315 ns Started: 189305 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189635 ns Started: 189625 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189635 ns Started: 189625 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189745 ns Started: 189735 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189745 ns Started: 189735 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189885 ns Started: 189875 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 189885 ns Started: 189875 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190045 ns Started: 190035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190045 ns Started: 190035 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190135 ns Started: 190125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190135 ns Started: 190125 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190505 ns Started: 190495 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190505 ns Started: 190495 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190615 ns Started: 190605 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190615 ns Started: 190605 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190735 ns Started: 190725 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190735 ns Started: 190725 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190995 ns Started: 190985 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 190995 ns Started: 190985 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191095 ns Started: 191085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191095 ns Started: 191085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191175 ns Started: 191165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191175 ns Started: 191165 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191465 ns Started: 191455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191465 ns Started: 191455 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191555 ns Started: 191545 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191555 ns Started: 191545 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191775 ns Started: 191765 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 191775 ns Started: 191765 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192035 ns Started: 192025 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192035 ns Started: 192025 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192205 ns Started: 192195 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192205 ns Started: 192195 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192565 ns Started: 192555 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192565 ns Started: 192555 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192645 ns Started: 192635 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 192645 ns Started: 192635 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 193115 ns Started: 193105 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 193115 ns Started: 193105 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 193915 ns Started: 193905 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 193915 ns Started: 193905 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 194125 ns Started: 194115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 194125 ns Started: 194115 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195395 ns Started: 195385 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195395 ns Started: 195385 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195525 ns Started: 195515 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195525 ns Started: 195515 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195835 ns Started: 195825 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 195835 ns Started: 195825 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196075 ns Started: 196065 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196075 ns Started: 196065 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196165 ns Started: 196155 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196165 ns Started: 196155 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196285 ns Started: 196275 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196285 ns Started: 196275 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196425 ns Started: 196415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196425 ns Started: 196415 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196495 ns Started: 196485 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196495 ns Started: 196485 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196775 ns Started: 196765 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196775 ns Started: 196765 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196865 ns Started: 196855 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196865 ns Started: 196855 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196965 ns Started: 196955 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 196965 ns Started: 196955 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 197175 ns Started: 197165 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 197175 ns Started: 197165 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 197535 ns Started: 197525 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 197535 ns Started: 197525 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 198515 ns Started: 198505 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 198515 ns Started: 198505 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 199125 ns Started: 199115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 199125 ns Started: 199115 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200075 ns Started: 200065 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200075 ns Started: 200065 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200595 ns Started: 200585 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200595 ns Started: 200585 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200895 ns Started: 200885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 200895 ns Started: 200885 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 201895 ns Started: 201885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 201895 ns Started: 201885 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202105 ns Started: 202095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202105 ns Started: 202095 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202305 ns Started: 202295 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202305 ns Started: 202295 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202805 ns Started: 202795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202805 ns Started: 202795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202955 ns Started: 202945 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 202955 ns Started: 202945 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203085 ns Started: 203075 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203085 ns Started: 203075 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203395 ns Started: 203385 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203395 ns Started: 203385 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203635 ns Started: 203625 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203635 ns Started: 203625 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203725 ns Started: 203715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203725 ns Started: 203715 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203845 ns Started: 203835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203845 ns Started: 203835 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203985 ns Started: 203975 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 203985 ns Started: 203975 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204055 ns Started: 204045 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204055 ns Started: 204045 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204335 ns Started: 204325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204335 ns Started: 204325 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204425 ns Started: 204415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204425 ns Started: 204415 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204525 ns Started: 204515 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204525 ns Started: 204515 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204735 ns Started: 204725 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204735 ns Started: 204725 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204815 ns Started: 204805 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204815 ns Started: 204805 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204875 ns Started: 204865 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 204875 ns Started: 204865 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205085 ns Started: 205075 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205085 ns Started: 205075 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205155 ns Started: 205145 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205155 ns Started: 205145 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205315 ns Started: 205305 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205315 ns Started: 205305 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205505 ns Started: 205495 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205505 ns Started: 205495 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205655 ns Started: 205645 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205655 ns Started: 205645 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205965 ns Started: 205955 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 205965 ns Started: 205955 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206025 ns Started: 206015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206025 ns Started: 206015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206385 ns Started: 206375 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206385 ns Started: 206375 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206805 ns Started: 206795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 206805 ns Started: 206795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207215 ns Started: 207205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207215 ns Started: 207205 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207345 ns Started: 207335 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207345 ns Started: 207335 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207565 ns Started: 207555 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207565 ns Started: 207555 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207665 ns Started: 207655 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207665 ns Started: 207655 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207945 ns Started: 207935 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 207945 ns Started: 207935 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 208135 ns Started: 208125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 208135 ns Started: 208125 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 208895 ns Started: 208885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 208895 ns Started: 208885 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209025 ns Started: 209015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209025 ns Started: 209015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209255 ns Started: 209245 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209255 ns Started: 209245 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209495 ns Started: 209485 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209495 ns Started: 209485 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209655 ns Started: 209645 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209655 ns Started: 209645 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209775 ns Started: 209765 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 209775 ns Started: 209765 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210225 ns Started: 210215 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210225 ns Started: 210215 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210305 ns Started: 210295 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210305 ns Started: 210295 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210695 ns Started: 210685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210695 ns Started: 210685 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210875 ns Started: 210865 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 210875 ns Started: 210865 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211045 ns Started: 211035 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211045 ns Started: 211035 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211785 ns Started: 211775 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211785 ns Started: 211775 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211935 ns Started: 211925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 211935 ns Started: 211925 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212135 ns Started: 212125 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212135 ns Started: 212125 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212225 ns Started: 212215 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212225 ns Started: 212215 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212325 ns Started: 212315 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212325 ns Started: 212315 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212465 ns Started: 212455 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212465 ns Started: 212455 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212705 ns Started: 212695 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212705 ns Started: 212695 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212805 ns Started: 212795 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 212805 ns Started: 212795 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213025 ns Started: 213015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213025 ns Started: 213015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213125 ns Started: 213115 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213125 ns Started: 213115 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213715 ns Started: 213705 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 213715 ns Started: 213705 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 214025 ns Started: 214015 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 214025 ns Started: 214015 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 214475 ns Started: 214465 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 214475 ns Started: 214465 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215155 ns Started: 215145 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215155 ns Started: 215145 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215605 ns Started: 215595 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215605 ns Started: 215595 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215725 ns Started: 215715 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 215725 ns Started: 215715 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216265 ns Started: 216255 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216265 ns Started: 216255 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216455 ns Started: 216445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216455 ns Started: 216445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216625 ns Started: 216615 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216625 ns Started: 216615 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216785 ns Started: 216775 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216785 ns Started: 216775 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216845 ns Started: 216835 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216845 ns Started: 216835 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216935 ns Started: 216925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 216935 ns Started: 216925 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 217855 ns Started: 217845 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 217855 ns Started: 217845 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 217935 ns Started: 217925 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 217935 ns Started: 217925 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218335 ns Started: 218325 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218335 ns Started: 218325 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218425 ns Started: 218415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218425 ns Started: 218415 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218695 ns Started: 218685 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 218695 ns Started: 218685 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 219825 ns Started: 219815 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 219825 ns Started: 219815 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 219975 ns Started: 219965 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 219975 ns Started: 219965 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 220075 ns Started: 220065 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 220075 ns Started: 220065 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 220445 ns Started: 220435 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 220445 ns Started: 220435 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 221285 ns Started: 221275 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 221285 ns Started: 221275 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 221495 ns Started: 221485 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 221495 ns Started: 221485 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223005 ns Started: 222995 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223005 ns Started: 222995 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223095 ns Started: 223085 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223095 ns Started: 223085 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223215 ns Started: 223205 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223215 ns Started: 223205 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223355 ns Started: 223345 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223355 ns Started: 223345 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223425 ns Started: 223415 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223425 ns Started: 223415 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223705 ns Started: 223695 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223705 ns Started: 223695 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223795 ns Started: 223785 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223795 ns Started: 223785 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223895 ns Started: 223885 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 223895 ns Started: 223885 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224105 ns Started: 224095 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224105 ns Started: 224095 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224185 ns Started: 224175 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224185 ns Started: 224175 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224245 ns Started: 224235 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224245 ns Started: 224235 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224455 ns Started: 224445 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224455 ns Started: 224445 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224525 ns Started: 224515 ns Scope: /tb/dchk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+
+Time: 224525 ns Started: 224515 ns Scope: /tb/chk File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/assertions.sv Line:28
+MUTRES,id=5,name=rvalid_withdraw,exp=A09/R/VALID_WITHDRAWAL,got=A09/D:R/VALID_WITHDRAWAL,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=445,pdiff=445,val_trig=19,val_pdiff=19,nrec=714,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=0,lat_win_cyc=62,view=BOTH,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=A09/R/VALID_WITHDRAWAL,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=0,lat_expected_win_cyc=62,expected_test=1,expected_in=t_directed
+MUTSUM dut=rtlmut seed=7 range=5..5 mutants=1 control=  OK killed=1 noisy=0 misdiagnosed=0 missed=0 ambiguous=0 not_exercised=0 invalid=0 full=1 val=1 records=1 expected_seen=1 primary_match=1
+MUTRATE den=1 (classified outcomes; excludes not_exercised=0 invalid=0 and control) detection_rate=1/1=100.0% expected_diag_rate=1/1=100.0% primary_diag_rate=1/1=100.0% clean_kill_rate=1/1=100.0% ambiguous_rate=0/1=0.0% misdiag_rate=0/1=0.0% noise_rate=0/1=0.0%
+CAMPAIGN PASS
+$finish called at time : 224595 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 985
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:46:53 2026...

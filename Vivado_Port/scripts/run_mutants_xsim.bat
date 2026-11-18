@@ -3,27 +3,8 @@ setlocal
 set "SCRIPT_DIR=%~dp0"
 call "%SCRIPT_DIR%compile_xsim.bat" || exit /b 1
 call "%SCRIPT_DIR%elaborate_xsim.bat" || exit /b 1
-
-echo.
-echo ========================================================
-echo Running Mutation Classifier Logic Verification...
-echo ========================================================
-call "%SCRIPT_DIR%run_xsim.bat" "-testplusarg" "MUTCLASSCHECK=1"
-
-echo.
-echo ========================================================
-echo Running Single Mutant Verification Sample (M01)...
-echo ========================================================
-call "%SCRIPT_DIR%run_xsim.bat" "-testplusarg" "DUT=rtlmut" "-testplusarg" "MUTID=1"
-
-echo.
-echo ========================================================
-echo Running Single Mutant Verification Sample (M02)...
-echo ========================================================
-call "%SCRIPT_DIR%run_xsim.bat" "-testplusarg" "DUT=rtlmut" "-testplusarg" "MUTID=2"
-
-echo.
-echo ========================================================
-echo [COMPLETE] Mutation testing finished.
-echo ========================================================
+call "%SCRIPT_DIR%run_xsim.bat" "-testplusarg" "MUTCLASSCHECK=1" || exit /b 1
+for %%S in (7 1) do (
+  call "%SCRIPT_DIR%run_xsim.bat" "-testplusarg" "MUTSWEEP=1" "-testplusarg" "MUTFIRST=1" "-testplusarg" "MUTLAST=20" "-testplusarg" "MUTFULL=1" "-testplusarg" "SEED=%%S" || exit /b 1
+)
 exit /b 0

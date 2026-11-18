@@ -1,0 +1,27 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:33:03 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg MUTSWEEP=1 -testplusarg MUTFIRST=9 -testplusarg MUTLAST=9 -testplusarg MUTFULL=1 -testplusarg SEED=1 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=rtlmut,test=regress,seed=1,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+MUTMANIFEST,dut=rtlmut,mutid=0,mutname=control,sweep=1,first=9,last=9,full=1,val=1,verbose=0,clk_ns=10
+MUTRES,id=0,name=control,exp=-/-/VALID_WITHDRAWAL,got=none,detected=0,det_ok=0,ch_ok=0,cat_ok=0,sec=-,unexp_sec=0,unexp_ids=-,trig=0,pdiff=0,val_trig=0,val_pdiff=0,nrec=0,tests_to_detect=0,detected_in=none,lat_pin_cyc=na,lat_win_cyc=na,view=NA,class=CONTROL_OK,reason=-,expected_seen=0,primary_match=0,primary_diag=-,primary_count=0,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=na,lat_expected_win_cyc=na,expected_test=0,expected_in=none
+107665 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+107665 ns : Assertion control system task $assertoff encountered. Assertion reporting is off. 
+115195 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+115195 ns : Assertion control system task $asserton encountered. Assertion reporting is on. 
+MUTRES,id=9,name=write_alias_w0_w15,exp=S06/R/DATA_MISMATCH,got=S06/R/DATA_MISMATCH,detected=1,det_ok=1,ch_ok=1,cat_ok=1,sec=-,unexp_sec=0,unexp_ids=-,trig=12,pdiff=44,val_trig=4,val_pdiff=6,nrec=12,tests_to_detect=1,detected_in=t_directed,lat_pin_cyc=1,lat_win_cyc=16,view=BUS,class=KILLED,reason=-,expected_seen=1,primary_match=1,primary_diag=S06/R/DATA_MISMATCH,primary_count=1,secondary_records=0,unexp_secondary_records=0,lat_expected_pin_cyc=1,lat_expected_win_cyc=16,expected_test=1,expected_in=t_directed
+MUTSUM dut=rtlmut seed=1 range=9..9 mutants=1 control=  OK killed=1 noisy=0 misdiagnosed=0 missed=0 ambiguous=0 not_exercised=0 invalid=0 full=1 val=1 records=1 expected_seen=1 primary_match=1
+MUTRATE den=1 (classified outcomes; excludes not_exercised=0 invalid=0 and control) detection_rate=1/1=100.0% expected_diag_rate=1/1=100.0% primary_diag_rate=1/1=100.0% clean_kill_rate=1/1=100.0% ambiguous_rate=0/1=0.0% misdiag_rate=0/1=0.0% noise_rate=0/1=0.0%
+CAMPAIGN PASS
+$finish called at time : 222765 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 985
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:33:09 2026...

@@ -9,6 +9,7 @@ class driver;
   int unsigned           flt_aw_chg;       // verification fault: change AWADDR once while stalled
   bit                    aw_ok, w_ok;
   bit                    rst_seen, abort_flag;
+  bit recovery_needed = 0;
 
   function new(virtual axi4l_if vif,
                mailbox #(transaction) g2d,
@@ -32,14 +33,15 @@ class driver;
   task dly(int unsigned n);
     repeat (n) begin
       @(posedge vif.ACLK);
-      if (vif.ARESETN !== 1'b1) rst_seen = 1'b1;
+      if (vif.ARESETN !== 1'b1) begin rst_seen = 1'b1; return; end
     end
   endtask
 
   task drive_aw(transaction t);
     int unsigned n = 0;
     aw_ok = 1'b0;
-    repeat (t.aw_dly) @(posedge vif.ACLK);
+    dly(t.aw_dly);
+    if (rst_seen) begin abort_flag = 1; return; end
     vif.AWADDR  <= t.addr;
     vif.AWVALID <= 1'b1;
     do begin
@@ -52,13 +54,20 @@ class driver;
       end
       if (vif.AWREADY && !rst_seen) aw_ok = 1'b1;
     end while (!aw_ok && !rst_seen && n < timeout_cycles);
+    if (!aw_ok && !rst_seen) begin
+      t.timed_out = 1; recovery_needed = 1;
+      // Only reset may cancel a stalled request. Hold payload and VALID.
+      wait (vif.ARESETN === 1'b0);
+      rst_seen = 1;
+    end
     vif.AWVALID <= 1'b0;
   endtask
 
   task drive_w(transaction t);
     int unsigned n = 0;
     w_ok = 1'b0;
-    repeat (t.w_dly) @(posedge vif.ACLK);
+    dly(t.w_dly);
+    if (rst_seen) begin abort_flag = 1; return; end
     vif.WDATA  <= t.data;
     vif.WSTRB  <= t.strb;
     vif.WVALID <= 1'b1;
@@ -68,57 +77,69 @@ class driver;
       if (vif.ARESETN !== 1'b1) rst_seen = 1'b1;   // reset hit a stalled request: abort, drop VALID
       if (vif.WREADY && !rst_seen) w_ok = 1'b1;
     end while (!w_ok && !rst_seen && n < timeout_cycles);
+    if (!w_ok && !rst_seen) begin
+      t.timed_out = 1; recovery_needed = 1;
+      // Only reset may cancel a stalled request. Hold payload and VALID.
+      wait (vif.ARESETN === 1'b0);
+      rst_seen = 1;
+    end
     vif.WVALID <= 1'b0;
   endtask
 
   task wait_b(transaction t);
     int unsigned n = 0;
-    bit got = 1'b0;
-    vif.BREADY <= 1'b0;
-    while (!got && n < timeout_cycles) begin
-      @(posedge vif.ACLK);
-      n++;
-      if (vif.ARESETN !== 1'b1) rst_seen = 1'b1;
-      if (vif.BVALID) got = 1'b1;
+    bit got = 0;
+    vif.BREADY <= 0;
+    while (!got && !rst_seen && n < timeout_cycles) begin
+      @(posedge vif.ACLK); n++;
+      if (vif.ARESETN !== 1'b1) rst_seen = 1;
+      else if (vif.BVALID === 1'b1) got = 1;
     end
-    if (!got) begin
-      if (rst_seen) abort_flag = 1'b1; else t.timed_out = 1'b1;
-      return;
+    if (got && !rst_seen) begin
+      dly(t.bready_dly);
+      if (!rst_seen) begin
+        vif.BREADY <= 1;
+        got = 0; n = 0;
+        while (!got && !rst_seen && n < timeout_cycles) begin
+          @(posedge vif.ACLK); n++;
+          if (vif.ARESETN !== 1'b1) rst_seen = 1;
+          else if (vif.BVALID === 1'b1 && vif.BREADY === 1'b1) begin
+            got = 1; t.rsp = vif.BRESP;
+          end
+        end
+      end
     end
-    dly(t.bready_dly);
-    vif.BREADY <= 1'b1;
-    @(posedge vif.ACLK);
-    t.rsp = vif.BRESP;
-    if (!vif.BVALID) begin
-      if (rst_seen) abort_flag = 1'b1; else t.timed_out = 1'b1;
-    end
-    vif.BREADY <= 1'b0;
+    if (rst_seen) abort_flag = 1;
+    else if (!got) t.timed_out = 1;
+    vif.BREADY <= 0;
   endtask
 
   task wait_r(transaction t);
     int unsigned n = 0;
-    bit got = 1'b0;
-    vif.RREADY <= 1'b0;
-    while (!got && n < timeout_cycles) begin
-      @(posedge vif.ACLK);
-      n++;
-      if (vif.ARESETN !== 1'b1) rst_seen = 1'b1;
-      if (vif.RVALID) got = 1'b1;
+    bit got = 0;
+    vif.RREADY <= 0;
+    while (!got && !rst_seen && n < timeout_cycles) begin
+      @(posedge vif.ACLK); n++;
+      if (vif.ARESETN !== 1'b1) rst_seen = 1;
+      else if (vif.RVALID === 1'b1) got = 1;
     end
-    if (!got) begin
-      if (rst_seen) abort_flag = 1'b1; else t.timed_out = 1'b1;
-      return;
+    if (got && !rst_seen) begin
+      dly(t.rready_dly);
+      if (!rst_seen) begin
+        vif.RREADY <= 1;
+        got = 0; n = 0;
+        while (!got && !rst_seen && n < timeout_cycles) begin
+          @(posedge vif.ACLK); n++;
+          if (vif.ARESETN !== 1'b1) rst_seen = 1;
+          else if (vif.RVALID === 1'b1 && vif.RREADY === 1'b1) begin
+            got = 1; t.rsp = vif.RRESP; t.rdata = vif.RDATA;
+          end
+        end
+      end
     end
-    dly(t.rready_dly);
-    vif.RREADY <= 1'b1;
-    @(posedge vif.ACLK);
-    t.rsp   = vif.RRESP;
-    t.rdata = vif.RDATA;
-    if (rst_seen)
-      abort_flag = 1'b1;
-    else if (!vif.RVALID)
-      t.timed_out = 1'b1;
-    vif.RREADY <= 1'b0;
+    if (rst_seen) abort_flag = 1;
+    else if (!got) t.timed_out = 1;
+    vif.RREADY <= 0;
   endtask
 
   task drive_write(transaction t);
@@ -134,7 +155,8 @@ class driver;
   task drive_read(transaction t);
     int unsigned n = 0;
     bit ok = 1'b0;
-    repeat (t.ar_dly) @(posedge vif.ACLK);
+    dly(t.ar_dly);
+    if (rst_seen) begin abort_flag = 1; return; end
     vif.ARADDR  <= t.addr;
     vif.ARVALID <= 1'b1;
     do begin
@@ -143,6 +165,12 @@ class driver;
       if (vif.ARESETN !== 1'b1) rst_seen = 1'b1;   // reset hit a stalled request: abort, drop VALID
       if (vif.ARREADY && !rst_seen) ok = 1'b1;
     end while (!ok && !rst_seen && n < timeout_cycles);
+    if (!ok && !rst_seen) begin
+      t.timed_out = 1; recovery_needed = 1;
+      // Only reset may cancel a stalled request. Hold payload and VALID.
+      wait (vif.ARESETN === 1'b0);
+      rst_seen = 1;
+    end
     vif.ARVALID <= 1'b0;
     if (rst_seen) abort_flag = 1'b1;               // reset during request phase: abort, not timeout
     else if (!ok) t.timed_out = 1'b1;
@@ -254,7 +282,8 @@ class driver;
       rst_seen   = 1'b0;
       if (t.op == OP_WRITE) drive_write(t);
       else                  drive_read(t);
-      if (abort_flag) begin
+      if (t.timed_out) recovery_needed = 1;
+      if (abort_flag && !t.timed_out) begin
         aborted++;
       end else if (t.timed_out) begin
         timeouts++;
@@ -267,6 +296,7 @@ class driver;
       end
       finished++;
       drv2done.put(t);
+      while (recovery_needed) @(posedge vif.ACLK);
       repeat (t.gap) @(posedge vif.ACLK);
     end
   endtask

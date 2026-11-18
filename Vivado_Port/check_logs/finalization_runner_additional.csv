@@ -1,0 +1,4 @@
+"case","exit","command"
+"mutant","0","call scripts\run_xsim.bat ""-testplusarg"" ""MUTSWEEP=1"" ""-testplusarg"" ""MUTFIRST=5"" ""-testplusarg"" ""MUTLAST=5"" ""-testplusarg"" ""MUTFULL=1"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_mutant.log 2>&1"
+"fault","0","call scripts\run_xsim.bat ""-testplusarg"" ""FAULT=100"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_fault.log 2>&1"
+"invalid","1","call scripts\run_xsim.bat ""-testplusarg"" ""TEST=does_not_exist"" ""-testplusarg"" ""SEED=7"" > check_logs\finalization_runner_invalid.log 2>&1"

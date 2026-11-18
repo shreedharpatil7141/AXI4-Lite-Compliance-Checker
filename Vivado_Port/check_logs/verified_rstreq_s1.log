@@ -1,0 +1,22 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:32:52 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg RSTREQ=1 -testplusarg SEED=1 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=1,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+RSTREQ_CASE,name=aw_stalled,armed=1,aborted=1,timeouts=0,completed=2,viol=0,scb_err=0,idle=1,PASS
+RSTREQ_CASE,name=w_stalled,armed=1,aborted=1,timeouts=0,completed=2,viol=0,scb_err=0,idle=1,PASS
+RSTREQ_CASE,name=ar_stalled,armed=1,aborted=1,timeouts=0,completed=2,viol=0,scb_err=0,idle=1,PASS
+RSTREQSUM,cases=3,pass=3,PASS
+CAMPAIGN PASS
+$finish called at time : 1095 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 928
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:32:54 2026...

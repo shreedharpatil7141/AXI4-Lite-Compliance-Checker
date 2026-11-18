@@ -1,0 +1,50 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:34:48 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg COVREQ=1 -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=7,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+REQSTALL_SAMPLE,channel=AW,requested_delay=0,measured_stall_cycles=0,OBSERVED
+REQSTALL_SAMPLE,channel=AW,requested_delay=1,measured_stall_cycles=1,OBSERVED
+REQSTALL_SAMPLE,channel=AW,requested_delay=3,measured_stall_cycles=3,OBSERVED
+REQSTALL_SAMPLE,channel=AW,requested_delay=5,measured_stall_cycles=5,OBSERVED
+REQSTALL_SAMPLE,channel=AW,requested_delay=11,measured_stall_cycles=11,OBSERVED
+REQSTALL_SAMPLE,channel=W,requested_delay=0,measured_stall_cycles=0,OBSERVED
+REQSTALL_SAMPLE,channel=W,requested_delay=1,measured_stall_cycles=1,OBSERVED
+REQSTALL_SAMPLE,channel=W,requested_delay=3,measured_stall_cycles=3,OBSERVED
+REQSTALL_SAMPLE,channel=W,requested_delay=5,measured_stall_cycles=5,OBSERVED
+REQSTALL_SAMPLE,channel=W,requested_delay=11,measured_stall_cycles=11,OBSERVED
+REQSTALL_SAMPLE,channel=AR,requested_delay=0,measured_stall_cycles=0,OBSERVED
+REQSTALL_SAMPLE,channel=AR,requested_delay=1,measured_stall_cycles=1,OBSERVED
+REQSTALL_SAMPLE,channel=AR,requested_delay=3,measured_stall_cycles=3,OBSERVED
+REQSTALL_SAMPLE,channel=AR,requested_delay=5,measured_stall_cycles=5,OBSERVED
+REQSTALL_SAMPLE,channel=AR,requested_delay=11,measured_stall_cycles=11,OBSERVED
+COV_REQSTALL boundary=master_visible AW=100.00 samples=10 W=100.00 samples=10 AR=100.00 samples=5
+COV_REQSTALL_BIN channel=AW name=zero hits=6 status=      HIT
+COV_REQSTALL_BIN channel=AW name=one hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AW name=two_three hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AW name=four_ten hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AW name=eleven_plus hits=1 status=      HIT
+COV_REQSTALL_BIN channel= W name=zero hits=6 status=      HIT
+COV_REQSTALL_BIN channel= W name=one hits=1 status=      HIT
+COV_REQSTALL_BIN channel= W name=two_three hits=1 status=      HIT
+COV_REQSTALL_BIN channel= W name=four_ten hits=1 status=      HIT
+COV_REQSTALL_BIN channel= W name=eleven_plus hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AR name=zero hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AR name=one hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AR name=two_three hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AR name=four_ten hits=1 status=      HIT
+COV_REQSTALL_BIN channel=AR name=eleven_plus hits=1 status=      HIT
+COVREQ_RESULT,AW_samples=10,W_samples=10,AR_samples=5,completed=15,timeouts=0,aborted=0,violations=0,PASS
+CAMPAIGN PASS
+$finish called at time : 1950 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 920
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:34:50 2026...

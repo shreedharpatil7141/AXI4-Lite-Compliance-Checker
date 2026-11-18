@@ -136,7 +136,7 @@ assertion can fire, independent of any DUT.
 
 ```mermaid
 flowchart LR
-    FT["fault_task.sv<br/>run_fault(1..18)"] --> FB["fbus<br/>axi4l_if + FRST"] --> FC["axi4l_checker (fchk)"] --> VM["viol_mon<br/>set_expect(cat, ch)"]
+    FT["fault_tasks.sv<br/>run_fault(1..18)"] --> FB["fbus<br/>axi4l_if + FRST"] --> FC["axi4l_checker (fchk)"] --> VM["viol_mon<br/>set_expect(cat, ch)"]
 ```
 
 ### 2.4 Test execution flow
@@ -207,10 +207,10 @@ is a fixed gap-to-test rerun, not an adaptive stimulus generator.
 | `violation_monitor.sv` | `vcat_e` categories and static `viol_mon` class |
 | `coverage.sv` | `cov_collector`: covergroups, goal tracker, gap report |
 | `assertions.sv` | `axi4l_checker` module (SVA + procedural checks) |
-| `latyency_injector.sv` | `axi4l_shim` module (latency plus verification-only fault hooks) |
+| `latency_injector.sv` | `axi4l_shim` module (latency plus verification-only fault hooks) |
 | `environment.sv` | `scoreboard2` and `environment` classes |
 | `test.sv` | `test_cfg`, `test_lib`, gap-to-test map |
-| `fault_task.sv` | Fault-bus driver tasks, included inside `module tb` |
+| `fault_tasks.sv` | Fault-bus driver tasks, included inside `module tb` |
 
 ### 3.2 Compile order
 
@@ -227,8 +227,8 @@ flowchart TB
     TBS["testbench.sv"] --> PKG["package tb_pkg"]
     PKG --> T1["transaction.sv"] --> T2["violation_monitor.sv"] --> T3["monitor.sv"] --> T4["coverage.sv"] --> T5["scoreboard.sv"] --> T6["gpio_model.sv"] --> T7["generator.sv"] --> T8["driver.sv"] --> T9["environment.sv"] --> T10["test.sv"]
     TBS --> ASR["assertions.sv (module)"]
-    TBS --> SHM["latyency_injector.sv (module)"]
-    TBS --> TOP["module tb"] --> FLT["fault_task.sv (inside tb)"]
+    TBS --> SHM["latency_injector.sv (module)"]
+    TBS --> TOP["module tb"] --> FLT["fault_tasks.sv (inside tb)"]
 ```
 
 The package provides one shared scope and a fixed class order. The checker and shim are modules, so they sit
@@ -603,7 +603,7 @@ The summary is printed to the transcript. No file I/O or external script is need
 4. Paste the matching code into each tab.
 5. **Check every tab:**
    - Line 1 must be code. A filename glued in front of `package` or `` `ifndef `` breaks the whole compile.
-   - Last lines: class files end with `endclass` then `` `endif ``. Module files end with `endmodule` then `` `endif ``. `testbench.sv` ends with `endmodule`. `fault_task.sv` ends with `endtask` (no include guard, it is pasted into `module tb`).
+   - Last lines: class files end with `endclass` then `` `endif ``. Module files end with `endmodule` then `` `endif ``. `testbench.sv` ends with `endmodule`. `fault_tasks.sv` ends with `endtask` (no include guard, it is pasted into `module tb`).
 6. **Run Options** (one line, no pasted log text):
 
    ```text
@@ -684,7 +684,7 @@ distinguishes these questions rather than collapsing them into one detection bit
 | `det_ok`, `ch_ok`, `cat_ok` | Expected detector present; expected detector plus normalized logical channel present; full expected detector/channel/category tuple present, respectively |
 | `expected_seen` | The frozen expected detector/channel/category tuple appeared anywhere in the scored records |
 | `primary_match` | That exact tuple is among the diagnostics at the earliest retained event timestamp |
-| `primary_diag` / `primary_count` | Unique detector/logical-channel/category tuples at the earliest timestamp; multiple tuples are co-primary and classify as `AMBIGUOUS` when the expected tuple is also present |
+| `primary_diag` / `primary_count` | Unique detector/logical-channel/category tuples at the earliest timestamp; multiple tuples are co-primary; `AMBIGUOUS` requires an unallowed co-primary tuple when the expected tuple is primary |
 | `got` | The first record in violation-monitor insertion order, retained for compatibility; it is not the primary-selection rule |
 | `secondary_records` | Retained records strictly later than the earliest event, excluding later instances of the expected tuple |
 | `unexp_secondary_records` | Secondary records not allowed by the mutant-specific detector, normalized channel and category rule |
@@ -694,8 +694,7 @@ distinguishes these questions rather than collapsing them into one detection bit
 | `lat_expected_pin_cyc`, `lat_expected_win_cyc` | Same references to the earliest occurrence of the frozen expected tuple; `na` means the timestamp/reference was unavailable, and `pre_reference` means the report predates the reference |
 
 Classification precedence is: `CONTROL_OK/FAIL`; mutation validity/exercise checks; `MISDIAGNOSED`
-if the expected tuple is absent or not primary; `AMBIGUOUS` if the expected tuple is co-primary
-with another distinct tuple; `NOISY` if a later, disallowed secondary record exists; otherwise
+if the expected tuple is absent or not primary; `AMBIGUOUS` if the expected tuple is primary alongside an unallowed co-primary tuple; `NOISY` if a later, disallowed secondary record exists; otherwise
 `KILLED`. Allowed secondary records remain visible in `sec`; the allowlist does not suppress
 records or checker reports. `MUTRATE detection_rate` is the fraction of denominator mutants with
 at least one retained checker violation record. It is not a pin-activation rate or proof of exact
@@ -774,7 +773,7 @@ Mutation note: under `+MUT=1`, `t_boundary` (full-strobe writes only) still pass
 5. **Adjust the generator address range** if the DUT is not a word-aligned memory.
 6. Run `+TEST=regress`, then `+NEG=100`.
 
-No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_monitor.sv` or `latyency_injector.sv`.
+No change is needed in `assertions.sv`, `monitor.sv`, `coverage.sv`, `violation_monitor.sv` or `latency_injector.sv`.
 
 ---
 
@@ -833,3 +832,13 @@ Interview wording: say "gap-driven rerun over a fixed map", not "autonomous clos
 ## License
 
 Add a license of your choice (for example MIT) before publishing.
+
+## Vivado / XSim port
+
+See [Vivado_Port/README.md](Vivado_Port/README.md) for Windows runners and
+[patch validation](Vivado_Port/VALIDATION_PATCH.md) for source state, commands and results.
+The root Design/ and TB/ remain the EDA Playground / Xcelium implementation;
+port fixes are isolated under Vivado_Port/. Existing local root edits are preserved.
+Allowed co-primary tuples do not create ambiguity. With the expected tuple primary,
+unallowed co-primary tuples cause AMBIGUOUS; otherwise unallowed later records cause
+NOISY, and a clean record set is KILLED.

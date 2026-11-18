@@ -1,0 +1,28 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:31:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg DRVREC=1 -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=7,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+RECOVERY timeout: reset, preserving queued transactions
+RECOVERY pending_wr=0 pending_rd=0 incomplete_wr=1
+DRV TIMEOUT t=140000 aw_ok=0 w_ok=1 AWV=1 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=0 | id=0 WR addr=00000020 data=abcdef01 strb=1111 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+RECOVERY timeout: reset, preserving queued transactions
+RECOVERY pending_wr=0 pending_rd=0 incomplete_wr=1
+DRV TIMEOUT t=460000 aw_ok=1 w_ok=0 AWV=0 AWR=0 WV=1 WR=0 BV=0 BR=0 ARESETN=0 | id=0 WR addr=00000020 data=abcdef01 strb=1111 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+RECOVERY timeout: reset, preserving queued transactions
+RECOVERY pending_wr=0 pending_rd=0 incomplete_wr=0
+DRV TIMEOUT t=780000 aw_ok=1 w_ok=1 AWV=0 AWR=0 WV=0 WR=0 BV=0 BR=0 ARESETN=0 | id=0 RD addr=00000020 data=00000000 strb=0000 exp=0 | aw=0 w=0 ar=0 bp_b=0 bp_r=0 | done=0 to=1 rsp=0 rdata=00000000
+DRVRECSUM cases=3 PASS
+CAMPAIGN PASS
+$finish called at time : 1005 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 924
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:31:28 2026...

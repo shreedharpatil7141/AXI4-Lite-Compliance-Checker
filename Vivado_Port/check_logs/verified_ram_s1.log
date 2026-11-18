@@ -1,0 +1,79 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:32:29 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg TEST=regress -testplusarg DUT=ram -testplusarg SEED=1 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=regress,seed=1,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+HDR,test,seed,gen,accepted,completed,wrL1_min/avg/max,wrL3_min/avg/max,rdL1_min/avg/max,rdL3_min/avg/max,timeouts,mismatch,viol,goals_new,goals_cum,cycles,abort,status
+RESULT,t_directed,1,45,45,45,2/2.00/2,3/3.30/8,1/1.00/1,2/2.45/9,0,0,0,34,34/49,198,0,PASS
+DLAT,t_directed,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_boundary,2,9,9,9,2/2.00/2,3/3.00/3,1/1.00/1,2/2.00/2,0,0,0,0,34/49,37,0,PASS
+DLAT,t_boundary,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_strobe,3,16,16,16,2/2.00/2,3/3.00/3,1/1.00/1,2/2.00/2,0,0,0,0,34/49,62,0,PASS
+DLAT,t_strobe,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_rand,4,100,100,100,2/2.00/2,3/6.96/13,1/1.00/1,2/5.08/12,0,0,0,6,40/49,1111,0,PASS
+DLAT,t_rand,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat0,5,85,85,85,2/2.00/2,3/4.00/13,1/1.00/1,2/3.94/12,0,0,0,0,40/49,588,0,PASS
+DLAT,t_lat0,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat1,6,85,85,85,3/3.00/3,4/4.97/14,2/2.00/2,3/4.90/13,0,0,0,2,42/49,661,0,PASS
+DLAT,t_lat1,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat2,7,85,85,85,4/4.00/4,5/6.00/15,3/3.00/3,4/5.90/14,0,0,0,2,44/49,742,0,PASS
+DLAT,t_lat2,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat5,8,85,85,85,7/7.00/7,8/8.75/13,6/6.00/6,7/8.90/17,0,0,0,2,46/49,988,0,PASS
+DLAT,t_lat5,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat10,9,85,85,85,12/12.00/12,13/13.71/18,11/11.00/11,12/14.06/22,0,0,0,2,48/49,1421,0,PASS
+DLAT,t_lat10,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_lat_rand,10,85,85,85,2/5.34/12,3/7.20/18,1/4.62/11,2/7.62/22,0,0,0,0,48/49,871,0,PASS
+DLAT,t_lat_rand,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=rand,inj_rd=rand
+RESULT,t_reqdly,11,85,85,85,2/2.00/2,3/4.26/13,1/1.00/1,2/3.90/12,0,0,0,0,48/49,848,0,PASS
+DLAT,t_reqdly,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_reset,12,65,65,65,2/2.00/2,3/3.87/13,1/1.00/1,2/4.00/12,0,0,0,0,48/49,420,0,PASS
+DLAT,t_reset,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_rand_big,13,200,200,200,2/2.00/2,3/7.25/13,1/1.00/1,2/5.54/12,0,0,0,0,48/49,2337,0,PASS
+DLAT,t_rand_big,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+RESULT,t_reset_live,14,69,69,68,2/2.00/2,3/3.68/8,1/1.00/1,2/3.38/12,0,0,0,0,48/49,398,1,PASS
+DLAT,t_reset_live,dut_wrL1=2/2.00/2,dut_rdL1=1/1.00/1,inj_wr=ok,inj_rd=ok
+VSUM VALID_WITHDRAWAL=0 PAYLOAD_INSTABILITY=0 UNEXPECTED_RESPONSE=0 MISSING_RESPONSE=0 RESPONSE_TIMEOUT=0 RESP_PAYLOAD_INSTABILITY=0 ILLEGAL_RESP_ENCODING=0 ACCOUNTING_MISMATCH=0 RESET_RECOVERY=0 DATA_MISMATCH=0 X_UNKNOWN=0 RESP_CODE_MISMATCH=0
+VSUM total=0 expected=0 unexpected=0 dup_suppressed=0 dut_facing=0
+COV goals total=49 | this run hit=49 (100.0%) | cumulative hit=49 (100.0%) remaining=0
+COV native cg_wr=99.00 cg_rd=100.00 (this run only, incl. crosses)
+COV_AWW_SKEW native=100.00 samples=487 bins_hit=7/7
+COV_AWW_SKEW_BIN name=same_cycle hits=237 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_1 hits=42 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_2_3 hits=68 status=      HIT
+COV_AWW_SKEW_BIN name=aw_first_4_plus hits=33 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_1 hits=27 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_2_3 hits=32 status=      HIT
+COV_AWW_SKEW_BIN name=w_first_4_plus hits=48 status=      HIT
+COV_REQSTALL boundary=master_visible AW=40.00 samples=487 W=40.00 samples=487 AR=40.00 samples=612
+COV_REQSTALL_BIN channel=AW name=zero hits=452 status=      HIT
+COV_REQSTALL_BIN channel=AW name=one hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel=AW name=two_three hits=35 status=      HIT
+COV_REQSTALL_BIN channel=AW name=four_ten hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel=AW name=eleven_plus hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel= W name=zero hits=452 status=      HIT
+COV_REQSTALL_BIN channel= W name=one hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel= W name=two_three hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel= W name=four_ten hits=35 status=      HIT
+COV_REQSTALL_BIN channel= W name=eleven_plus hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel=AR name=zero hits=562 status=      HIT
+COV_REQSTALL_BIN channel=AR name=one hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel=AR name=two_three hits=50 status=      HIT
+COV_REQSTALL_BIN channel=AR name=four_ten hits=0 status=UNCOVERED
+COV_REQSTALL_BIN channel=AR name=eleven_plus hits=0 status=UNCOVERED
+COVMASK=0001ffffffffffff
+REGRESS dut=ram tests=14 pass=14 fail=0 goals_hit=49/49
+GLOBAL unexpected_total=0 in_tests=0 outside_tests=0 iso_event_starts=0 iso_response_channel_cycles=0 iso_unique_clock_cycles=0 iso_metric_oracle=PASS dut_facing=0 inj_mismatch=0
+STAGE9 mode=regress dut=ram seed=1 mut=0 cycles=10757 PASS
+CAMPAIGN PASS
+$finish called at time : 107571 ns : File "C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv" Line 1039
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:32:32 2026...

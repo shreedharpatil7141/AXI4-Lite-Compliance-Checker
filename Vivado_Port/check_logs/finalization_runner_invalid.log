@@ -1,0 +1,21 @@
+
+****** xsim v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Wed Nov 18 19:46:56 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi4l_sim/xsim_script.tcl
+# xsim {axi4l_sim} -testplusarg TEST=does_not_exist -testplusarg SEED=7 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+MANIFEST,dut=ram,test=does_not_exist,seed=7,mut=0,fault=0,neg=0,mask=0,injout=0,isoleak=0,n_ovr=0,prior=0000000000000000,lat_limit=100,wr_base=2,rd_base=1,depth=16
+HDR,test,seed,gen,accepted,completed,wrL1_min/avg/max,wrL3_min/avg/max,rdL1_min/avg/max,rdL3_min/avg/max,timeouts,mismatch,viol,goals_new,goals_cum,cycles,abort,status
+Fatal: STAGE9 ERROR unknown test does_not_exist
+Time: 45 ns  Iteration: 0  Process: /tb/Initial830_226  Scope: tb.Block830_227  File: C:/AXI4-Lite Compliance Checker/Vivado_Port/TB/testbench.sv Line: 1004
+$finish called at time : 45 ns
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 18 19:46:58 2026...
+[ERROR] Missing required summary STAGE9 mode= in C:\Users\SHREED~1\AppData\Local\Temp\axi4l_15576_5262.log
